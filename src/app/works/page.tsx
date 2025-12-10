@@ -3,7 +3,7 @@ import { STORIES } from "@/lib/data";
 
 export default function WorksPage() {
     return (
-        <div className="bg-white dark:bg-black min-h-screen pt-12 pb-24 px-6 md:px-12">
+        <div className="bg-white dark:bg-black min-h-screen pt-32 pb-24 px-6 md:px-12">
             <div className="max-w-7xl mx-auto">
                 <header className="mb-20">
                     <h1 className="text-5xl md:text-7xl font-serif mb-6 text-neutral-900 dark:text-neutral-100">Our Projects</h1>

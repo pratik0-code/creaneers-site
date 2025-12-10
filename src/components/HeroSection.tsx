@@ -6,8 +6,8 @@ export default function HeroSection() {
             {/* Background Image - Placeholder until we have real assets */}
             <div className="absolute inset-0 z-0 bg-neutral-200">
                 {/* In a real app, this would be a high-quality Next/Image */}
-                <div className="w-full h-full bg-stone-300 animate-pulse relative">
-                    <div className="absolute inset-0 flex items-center justify-center text-stone-400 text-6xl opacity-20 font-serif italic">
+                <div className="w-full h-full bg-stone-300 dark:bg-neutral-800 animate-pulse relative">
+                    <div className="absolute inset-0 flex items-center justify-center text-stone-400 dark:text-neutral-600 text-6xl opacity-20 font-serif italic">
                         Visual Storytelling
                     </div>
                 </div>

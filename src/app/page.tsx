@@ -11,7 +11,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <HeroSection />
 
-      <section className="py-24 px-6 md:px-12 bg-white">
+      <section className="py-24 px-6 md:px-12 bg-white dark:bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16">
             <h2 className="text-4xl md:text-5xl font-serif mb-6 md:mb-0 text-neutral-900 dark:text-neutral-100">
@@ -31,7 +31,7 @@ export default function Home() {
           <div className="mt-20 text-center">
             <Link
               href="/works"
-              className="inline-block border-b border-black pb-1 uppercase text-xs tracking-widest hover:text-neutral-500 transition-colors"
+              className="inline-block border-b border-black dark:border-white pb-1 uppercase text-xs tracking-widest hover:text-neutral-500 dark:hover:text-neutral-300 transition-colors text-neutral-900 dark:text-white"
             >
               View All Projects
             </Link>
