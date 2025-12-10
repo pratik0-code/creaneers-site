@@ -11,7 +11,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <HeroSection />
 
-      <section className="py-24 px-6 md:px-12 bg-white dark:bg-black">
+      <section className="py-24 px-6 md:px-12 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16">
             <h2 className="text-4xl md:text-5xl font-serif mb-6 md:mb-0 text-neutral-900 dark:text-neutral-100">

@@ -38,7 +38,9 @@ export default function Header() {
             return `${baseClasses} bg-transparent text-white`;
         }
 
-        return `${baseClasses} bg-white/90 dark:bg-black/90 backdrop-blur-md text-neutral-900 dark:text-white border-b border-neutral-100 dark:border-neutral-800 shadow-sm`;
+        // Header.tsx updates
+        return `${baseClasses} bg-background/90 backdrop-blur-md text-neutral-900 dark:text-white border-b border-neutral-100 dark:border-neutral-800 shadow-sm`;
+
     };
 
     return (
@@ -75,7 +77,7 @@ export default function Header() {
 
             {/* Mobile Nav Overlay */}
             {mobileMenuOpen && (
-                <div className="fixed inset-0 bg-white/95 dark:bg-black/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center space-y-10 md:hidden animate-in fade-in duration-200">
+                <div className="fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center space-y-10 md:hidden animate-in fade-in duration-200">
                     <Link href="/works" className="text-4xl font-serif text-neutral-900 dark:text-white hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Works</Link>
                     <Link href="/about" className="text-4xl font-serif text-neutral-900 dark:text-white hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>About</Link>
                     <Link href="/contact" className="text-4xl font-serif text-neutral-900 dark:text-white hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Contact</Link>

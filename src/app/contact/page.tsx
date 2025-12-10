@@ -1,6 +1,7 @@
 export default function ContactPage() {
     return (
-        <div className="bg-white dark:bg-black min-h-screen pt-32 pb-24 px-6 md:px-12 flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
+        <div className="bg-background min-h-screen pt-32 pb-24 px-6 md:px-12 flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
+
             <div className="flex-1">
                 <h1 className="text-5xl md:text-7xl font-serif mb-12 text-neutral-900 dark:text-white">Contact Us</h1>
                 <p className="text-lg font-light text-neutral-800 dark:text-neutral-200 max-w-md mb-12">

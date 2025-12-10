@@ -1,6 +1,6 @@
 export default function AboutPage() {
     return (
-        <div className="bg-white dark:bg-black min-h-screen pt-32 pb-24 px-6 md:px-12">
+        <div className="bg-background min-h-screen pt-32 pb-24 px-6 md:px-12">
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-5xl md:text-7xl font-serif mb-12 text-neutral-900 dark:text-white">About CREANEERS</h1>
 
