@@ -24,7 +24,7 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: "CREANEERS | Architecture & Interior",
+  title: "CREANEERS | Design and Consult",
   description: "Sculpting spaces that inspire, endure, and elevate the human experience.",
 };
 
