@@ -9,7 +9,7 @@ export default function SignaturePreloader() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsVisible(false);
-        }, 5000); // Extended duration for multiple signatures
+        }, 2500); // Reduced to 2.5s for faster dismissal
         return () => clearTimeout(timer);
     }, []);
 
@@ -21,42 +21,25 @@ export default function SignaturePreloader() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.8, ease: "easeInOut" }}
                 >
-                    <svg
-                        viewBox="0 0 600 300"
-                        className="w-full h-full max-w-2xl px-10 text-neutral-900 dark:text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    >
-                        {/* Creaneers Cursive Signature - Centered */}
-                        <motion.g transform="translate(50, 100)">
-                            {/* Letter C */}
+                    <div className="w-full max-w-4xl px-4">
+                        <svg
+                            viewBox="0 0 800 300"
+                            className="w-full h-auto"
+                        >
                             <motion.path
-                                d="M 80 50 c -40 -40 -60 60 -10 60"
+                                d="M 120 160 C 60 160 60 40 140 60 C 160 65 150 120 170 120 C 180 120 180 90 190 90 C 200 90 210 90 195 120 C 190 130 220 130 230 120 C 240 110 230 90 245 90 C 260 90 260 130 245 120 C 240 115 270 120 280 120 C 290 120 290 90 305 90 C 320 90 320 120 330 120 C 340 120 350 120 340 90 C 330 80 360 130 380 120 C 390 120 400 120 390 90 C 380 80 410 130 430 120 C 440 115 430 90 450 90 C 470 90 460 130 490 110 C 500 100 490 90 470 120 M 100 180 C 200 190 400 170 550 180"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                                className="text-neutral-900 dark:text-white"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 initial={{ pathLength: 0, opacity: 0 }}
                                 animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 0.4, ease: "easeInOut", delay: 0.5 }}
+                                transition={{ duration: 2.0, ease: "easeInOut" }}
                             />
-                            {/* Letters reaneers */}
-                            <motion.path
-                                d="M 70 110 c 10 -10 10 -30 20 -30 c 10 0 10 20 10 30 c 10 -20 20 -30 30 -10 c 5 10 0 20 -10 10 c -10 -10 0 -30 20 -20 c 20 10 10 30 30 30 c 10 -10 20 -20 30 -20 c 10 0 10 20 10 30 c 0 -20 10 -30 20 -30 c 10 0 10 20 10 30 c 10 -20 20 -30 30 -10 c 5 10 0 20 -10 10 c -10 -10 0 -30 20 -20 c 20 10 10 30 30 30 c 10 -20 20 -30 30 -10 c 5 10 0 20 -10 10 c -10 -10 0 -30 20 -20 c 20 10 10 30 30 30 c 10 -20 10 -30 20 -30 c 10 0 10 20 10 20 c 10 -10 20 -20 30 0 c 10 20 -10 20 -20 10"
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 2.0, ease: "linear", delay: 0.9 }}
-                            />
-
-                            {/* Energetic Underline/Swoosh */}
-                            <motion.path
-                                d="M 40 140 q 100 20 250 -10 t 150 10"
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ pathLength: 1, opacity: 1 }}
-                                strokeWidth="3"
-                                transition={{ duration: 0.6, ease: "easeOut", delay: 3.0 }}
-                            />
-                        </motion.g>
-                    </svg>
+                        </svg>
+                    </div>
                 </motion.div>
             )}
         </AnimatePresence>

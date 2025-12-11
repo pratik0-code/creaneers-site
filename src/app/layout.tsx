@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Geist, Geist_Mono } from "next/font/google";
+import { Outfit, Geist, Geist_Mono, Great_Vibes } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -17,6 +17,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const greatVibes = Great_Vibes({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-great-vibes",
+});
+
 export const metadata: Metadata = {
   title: "CREANEERS | Architecture & Interior",
   description: "Sculpting spaces that inspire, endure, and elevate the human experience.",
@@ -28,8 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${outfit.className} antialiased bg-background text-neutral-900 selection:bg-neutral-900 selection:text-white`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${outfit.className} ${greatVibes.variable} antialiased bg-background text-neutral-900 selection:bg-neutral-900 selection:text-white`}>
         <SignaturePreloader />
         <Header />
         {children}
