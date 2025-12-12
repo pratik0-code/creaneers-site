@@ -76,8 +76,8 @@ export default function Header() {
 
     return (
         <header className={getHeaderClasses()}>
-            <Link href="/" className="text-2xl font-bold tracking-tighter uppercase z-50 relative">
-                CREANEERS
+            <Link href="/" className="z-50 relative">
+                <img src="/icon.png" alt="CREANEERS" className="h-12 md:h-24 w-auto object-contain" />
             </Link>
 
             {/* Desktop Nav */}
