@@ -1,6 +1,7 @@
 import { STORIES } from "@/lib/data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import ImageGallery from "@/components/ImageGallery";
 
 export function generateStaticParams() {
     return STORIES.map((story) => ({
@@ -51,17 +52,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                 {project.images && project.images.length > 0 && (
                     <div className="mb-16 space-y-4">
                         <h3 className="text-sm font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-8">Project Gallery</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {project.images.map((img, idx) => (
-                                <div key={idx} className={`relative overflow-hidden group ${idx % 3 === 0 ? 'md:col-span-2 aspect-[21/9]' : 'aspect-[4/3]'}`}>
-                                    <img
-                                        src={img}
-                                        alt={`${project.title} image ${idx + 1}`}
-                                        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 filter grayscale-0 md:grayscale md:hover:grayscale-0"
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                        <ImageGallery images={project.images} title={project.title} />
                     </div>
                 )}
 

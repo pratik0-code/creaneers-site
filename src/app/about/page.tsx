@@ -28,18 +28,18 @@ export default function AboutPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="bg-neutral-50 dark:bg-neutral-900 p-8">
                             <div className="w-16 h-16 bg-neutral-200 dark:bg-neutral-700 rounded-full mb-4" />
+                            <h5 className="font-serif text-xl text-neutral-900 dark:text-white">Pranav Gautam</h5>
+                            <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Founder</p>
+                        </div>
+                        <div className="bg-neutral-50 dark:bg-neutral-900 p-8">
+                            <div className="w-16 h-16 bg-neutral-200 dark:bg-neutral-700 rounded-full mb-4" />
                             <h5 className="font-serif text-xl text-neutral-900 dark:text-white">Prayush Giri</h5>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Principal Architect</p>
+                            <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Co-Founder</p>
                         </div>
                         <div className="bg-neutral-50 dark:bg-neutral-900 p-8">
                             <div className="w-16 h-16 bg-neutral-200 dark:bg-neutral-700 rounded-full mb-4" />
                             <h5 className="font-serif text-xl text-neutral-900 dark:text-white">Goveenda Budathoki</h5>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Design Director</p>
-                        </div>
-                        <div className="bg-neutral-50 dark:bg-neutral-900 p-8">
-                            <div className="w-16 h-16 bg-neutral-200 dark:bg-neutral-700 rounded-full mb-4" />
-                            <h5 className="font-serif text-xl text-neutral-900 dark:text-white">Er. Pranav Gautam</h5>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Civil Engineer</p>
+                            <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Co-Founder</p>
                         </div>
                     </div>
                 </div>
