@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-interface StoryCardProps {
+interface DisplayCardProps {
     id: string;
     title: string;
     category: string;
     excerpt: string;
-    imageUrl?: string; // Optional for now
+    imageUrl?: string; 
     images?: string[];
 }
 
-export default function StoryCard({ id, title, category, excerpt, imageUrl, images }: StoryCardProps) {
+export default function DisplayCard({ id, title, category, excerpt, imageUrl, images }:  DisplayCardProps) {
     const displayImage = imageUrl || (images && images.length > 0 ? images[0] : null);
 
     return (

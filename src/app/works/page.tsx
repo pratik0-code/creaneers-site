@@ -1,4 +1,4 @@
-import StoryCard from "@/components/StoryCard";
+import StoryCard from "@/components/DisplayCard";
 import { STORIES } from "@/lib/data";
 
 export default function WorksPage() {

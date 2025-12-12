@@ -1,5 +1,5 @@
 import HeroSection from "@/components/HeroSection";
-import StoryCard from "@/components/StoryCard";
+import DisplayCard from "@/components/DisplayCard";
 import Link from "next/link";
 import { STORIES } from "@/lib/data";
 
@@ -24,7 +24,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
             {FEATURED_PROJECTS.map((project) => (
-              <StoryCard key={project.id} {...project} />
+              <DisplayCard key={project.id} {...project} />
             ))}
           </div>
 

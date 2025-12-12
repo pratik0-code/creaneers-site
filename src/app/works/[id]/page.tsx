@@ -57,7 +57,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                                     <img
                                         src={img}
                                         alt={`${project.title} image ${idx + 1}`}
-                                        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 filter grayscale hover:grayscale-0"
+                                        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 filter grayscale-0 md:grayscale md:hover:grayscale-0"
                                     />
                                 </div>
                             ))}

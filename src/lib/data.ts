@@ -21,7 +21,7 @@ export const STORIES: Story[] = [
     `,
         date: "2024",
         siteArea: "1050 sq.ft.",
-        imageUrl: "/images/projects/new-residential/6215.jpg",
+        imageUrl: "/images/projects/new-residential/6216.png",
         images: [
             "/images/projects/new-residential/6215.jpg",
             "/images/projects/new-residential/6216.png",
