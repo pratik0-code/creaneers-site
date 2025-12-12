@@ -105,7 +105,7 @@ export default function SignaturePreloader() {
                         </div>
 
                         {/* Text Container */}
-                        <div className="flex flex-col text-white">
+                        <div className="flex flex-col text-white items-center">
                             <motion.h1
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
