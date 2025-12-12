@@ -51,6 +51,7 @@ export default function Header() {
             router.push(`/works/${project.id}`);
             setSearchQuery('');
             setSearchOpen(false);
+            setMobileMenuOpen(false);
         } else {
             // Optional: Show error or shake animation
             alert('Project not found');
@@ -140,6 +141,16 @@ export default function Header() {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center space-y-10 md:hidden"
                     >
+                        <form onSubmit={handleSearchSubmit} className="relative w-3/4 max-w-xs mb-4">
+                            <input
+                                type="text"
+                                placeholder="Search projects..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full bg-transparent border-b border-neutral-800 dark:border-white/20 py-2 text-xl font-serif text-center placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 dark:focus:border-white transition-colors"
+                            />
+                        </form>
+
                         <Link href="/works" className="text-4xl font-serif text-neutral-900 dark:text-white hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Works</Link>
                         <Link href="/about" className="text-4xl font-serif text-neutral-900 dark:text-white hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>About</Link>
                         <Link href="/contact" className="text-4xl font-serif text-neutral-900 dark:text-white hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
