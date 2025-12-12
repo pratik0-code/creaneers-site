@@ -58,6 +58,8 @@ export default function Header() {
         }
     };
 
+    const isTransparent = isHome && !scrolled && !searchOpen;
+
     const getHeaderClasses = () => {
         const baseClasses = `${outfit.className} fixed top-0 w-full z-50 py-6 px-6 md:px-12 flex justify-between items-center transition-all duration-300`;
 
@@ -65,19 +67,22 @@ export default function Header() {
             return `${baseClasses} bg-transparent text-neutral-900 dark:text-white`;
         }
 
-        if (isHome && !scrolled && !searchOpen) {
+        if (isTransparent) {
             return `${baseClasses} bg-transparent text-white`;
         }
 
         // Header.tsx updates
         return `${baseClasses} bg-background/90 backdrop-blur-md text-neutral-900 dark:text-white border-b border-neutral-100 dark:border-neutral-800 shadow-sm`;
-
     };
 
     return (
         <header className={getHeaderClasses()}>
             <Link href="/" className="z-50 relative">
-                <img src="/icon.png" alt="CREANEERS" className="h-12 md:h-24 w-auto object-contain" />
+                <img
+                    src="/icon.png"
+                    alt="CREANEERS"
+                    className={`h-10 md:h-14 w-auto object-contain transition-all duration-300 brightness-0 ${isTransparent ? 'invert' : 'dark:invert'}`}
+                />
             </Link>
 
             {/* Desktop Nav */}
