@@ -118,7 +118,7 @@ export default function SignaturePreloader() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 1.8, duration: 0.8 }}
-                                className="text-xs md:text-sm font-light tracking-[0.2em] text-neutral-500 block -mt-2 uppercase text-center"
+                                className="text-xs md:text-sm font-light tracking-[0.2em] pl-[0.8em] text-neutral-500 block -mt-2 uppercase text-center"
                             >
                                 Design & Consults
                             </motion.p>
