@@ -12,7 +12,7 @@ export interface Story {
 
 export const STORIES: Story[] = [
     {
-        id: "1",
+        id: "baral_residence",
         title: "Baral Residence",
         category: "Residential",
         excerpt: "A contemporary residential project located at Itahari, Pachruki.",

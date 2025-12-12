@@ -2,14 +2,14 @@ import Link from 'next/link';
 
 export default function Footer() {
     return (
-        <footer className="bg-neutral-900 text-white py-20 px-6 md:px-12 mt-auto border-t border-neutral-800 dark:border-neutral-800">
+        <footer className="bg-neutral-900 text-white py-20 px-6 md:px-6 mt-auto border-t border-neutral-800 dark:border-neutral-800">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start">
                 <div>
                     <Link href="/" className="flex flex-col items-center mb-6 group w-fit">
                         <h2 className="text-4xl md:text-5xl tracking-tighter text-white leading-none group-hover:opacity-80 transition-opacity text-center">
                             CREANEERS
                         </h2>
-                        <span className="text-xs md:text-sm font-light tracking-[0.2em] pl-[0.2em] text-neutral-500 block -mt-2 group-hover:text-white transition-colors duration-300 text-center">
+                        <span className="text-xs md:text-sm font-light tracking-[0.2em] pl-[0.8em] text-neutral-500 block -mt-1 group-hover:text-white transition-colors duration-300 text-center">
                             Design & Consults
                         </span>
                     </Link>

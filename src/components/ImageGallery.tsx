@@ -24,9 +24,13 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
                             layoutId={`img-${img}`} // Shared layout ID for smooth transition
                             src={img}
                             alt={`${title} image ${idx + 1}`}
-                            className="object-cover w-full h-full filter grayscale md:hover:grayscale-0"
+                            className="object-cover w-full h-full filter grayscale hover:grayscale-0 active:grayscale-0 transition-[filter] duration-500 ease-in-out select-none"
+                            style={{ WebkitTouchCallout: 'none' }}
+                            onContextMenu={(e) => e.preventDefault()}
+                            draggable={false}
                             whileHover={{ scale: 1.05 }}
-                            transition={{ duration: 0.5 }}
+                            whileTap={{ scale: 1.05 }}
+                            transition={{ type: "spring", stiffness: 150, damping: 20 }}
                         />
                     </div>
                 ))}
