@@ -9,7 +9,7 @@ export default function SignaturePreloader() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsVisible(false);
-        }, 2200); // Shortened slightly since text is gone
+        }, 4000); // Extended duration to ensure text is fully visible
         return () => clearTimeout(timer);
     }, []);
 
@@ -37,9 +37,9 @@ export default function SignaturePreloader() {
                 <motion.div
                     className="fixed inset-0 z-[100] flex items-center justify-center bg-zinc-950"
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
-                    <div className="flex items-center gap-6 md:gap-8 translate-y-[-10%]">
+                    <div className="flex items-center gap-6 md:gap-10 translate-y-[-10%]">
                         {/* Logo Container */}
                         <div className="w-32 h-32 md:w-40 md:h-40 relative flex-shrink-0">
                             <svg
@@ -48,8 +48,8 @@ export default function SignaturePreloader() {
                                 fill="none"
                                 stroke="currentColor"
                                 strokeWidth="10"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
+                                strokeLinecap="square" // Rectangular edges
+                                strokeLinejoin="miter" // Sharp corners
                             >
                                 {/* Main Outline: Base(Right-to-Left) -> Wall -> Roof Peak -> Roof End */}
                                 <motion.path
@@ -69,9 +69,9 @@ export default function SignaturePreloader() {
                                     custom={1}
                                 />
 
-                                {/* Vertical Pillar 2 (Shorter) */}
+                                {/* Vertical Pillar 2 (Shorter) - Moved right for gap */}
                                 <motion.path
-                                    d="M 170 150 L 170 100"
+                                    d="M 180 150 L 180 110"
                                     variants={drawVariants}
                                     initial="hidden"
                                     animate="visible"
@@ -80,23 +80,25 @@ export default function SignaturePreloader() {
 
                                 {/* Dashed Connector: Bottoms (House Base -> Pillars) */}
                                 <motion.path
-                                    d="M 110 150 L 180 150"
+                                    d="M 110 150 L 190 150"
                                     variants={drawVariants}
                                     initial="hidden"
                                     animate="visible"
                                     custom={3}
-                                    strokeDasharray="6 6"
+                                    strokeDasharray="4 4"
+                                    strokeWidth="3" // Very thin
                                     className="opacity-50"
                                 />
 
                                 {/* Dashed Connector: Tops (Roof Projection) */}
                                 <motion.path
-                                    d="M 130 60 L 180 110"
+                                    d="M 130 60 L 190 120"
                                     variants={drawVariants}
                                     initial="hidden"
                                     animate="visible"
                                     custom={4}
-                                    strokeDasharray="6 6"
+                                    strokeDasharray="4 4"
+                                    strokeWidth="3" // Very thin
                                     className="opacity-50"
                                 />
                             </svg>
