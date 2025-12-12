@@ -6,10 +6,10 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start">
                 <div>
                     <Link href="/" className="flex flex-col items-center mb-6 group w-fit">
-                        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-white leading-none mb-1 group-hover:opacity-80 transition-opacity text-center">
+                        <h2 className="text-4xl md:text-5xl tracking-tighter text-white leading-none group-hover:opacity-80 transition-opacity text-center">
                             CREANEERS
                         </h2>
-                        <span className="text-xs md:text-sm font-light tracking-[0.2em] text-neutral-400 uppercase block group-hover:text-white transition-colors duration-300 text-center">
+                        <span className="text-xs md:text-sm font-light tracking-[0.2em] pl-[0.2em] text-neutral-500 block -mt-2 group-hover:text-white transition-colors duration-300 text-center">
                             Design & Consults
                         </span>
                     </Link>

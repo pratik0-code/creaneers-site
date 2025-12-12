@@ -110,15 +110,15 @@ export default function SignaturePreloader() {
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
-                                className="text-4xl md:text-6xl font-bold tracking-tight leading-none"
+                                className="text-4xl md:text-5xl tracking-tighter text-white leading-none text-center"
                             >
-                                Creaneers
+                                CREANEERS
                             </motion.h1>
                             <motion.p
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 1.8, duration: 0.8 }}
-                                className="text-sm md:text-lg font-light tracking-[0.3em] uppercase opacity-80 mt-1 md:mt-2"
+                                className="text-xs md:text-sm font-light tracking-[0.2em] text-neutral-500 block -mt-2 uppercase text-center"
                             >
                                 Design & Consults
                             </motion.p>

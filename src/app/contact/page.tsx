@@ -48,7 +48,15 @@ export default function ContactPage() {
                     <div>
                         <span className="block text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">Headquarters</span>
                         <p className="text-xl font-light text-neutral-900 dark:text-neutral-100">
-                            Itahari, Nepal
+                            Kathmandu-10, Nepal
+                        </p>
+                    </div>
+                    <div>
+                        <span className="block text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">Contact</span>
+                        <p className="text-xl font-light text-neutral-900 dark:text-neutral-100">
+                            +977 9868627913<br></br>
+                            +977 9847690957<br></br>
+                            +977 9804328347<br></br>
                         </p>
                     </div>
                 </div>
