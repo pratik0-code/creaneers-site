@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface StoryCardProps {
     id: string;
@@ -6,19 +7,33 @@ interface StoryCardProps {
     category: string;
     excerpt: string;
     imageUrl?: string; // Optional for now
+    images?: string[];
 }
 
-export default function StoryCard({ id, title, category, excerpt }: StoryCardProps) {
+export default function StoryCard({ id, title, category, excerpt, imageUrl, images }: StoryCardProps) {
+    const displayImage = imageUrl || (images && images.length > 0 ? images[0] : null);
+
     return (
         <Link href={`/works/${id}`} className="group block">
             <div className="relative aspect-[3/4] overflow-hidden bg-neutral-100 dark:bg-neutral-800 mb-4">
-                {/* Placeholder for image */}
-                <div className="absolute inset-0 bg-stone-200 dark:bg-neutral-800 transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 flex items-center justify-center text-neutral-400 font-light italic">
-                    Image
-                </div>
+                {displayImage ? (
+                    <Image
+                        src={displayImage}
+                        alt={title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                ) : (
+                    <>
+                        {/* Placeholder for image */}
+                        <div className="absolute inset-0 bg-stone-200 dark:bg-neutral-800 transition-transform duration-700 group-hover:scale-105" />
+                        <div className="absolute inset-0 flex items-center justify-center text-neutral-400 font-light italic">
+                            Image
+                        </div>
+                    </>
+                )}
 
-                <div className="absolute top-4 left-4 bg-white dark:bg-neutral-900 px-3 py-1 text-xs uppercase tracking-widest font-medium dark:text-white">
+                <div className="absolute top-4 left-4 bg-white dark:bg-neutral-900 px-3 py-1 text-xs uppercase tracking-widest font-medium dark:text-white z-10">
                     {category}
                 </div>
             </div>

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SignaturePreloader from "@/components/SignaturePreloader";
+import DeveloperSignature from "@/components/DeveloperSignature";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -36,6 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${outfit.className} ${greatVibes.variable} antialiased bg-background text-neutral-900 selection:bg-neutral-900 selection:text-white`}>
+        <DeveloperSignature />
         <SignaturePreloader />
         <Header />
         {children}

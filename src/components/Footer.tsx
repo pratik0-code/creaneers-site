@@ -16,9 +16,9 @@ export default function Footer() {
                 <div className="grid grid-cols-2 gap-12 text-sm uppercase tracking-widest font-light">
                     <div className="flex flex-col space-y-4">
                         <span className="text-neutral-400 dark:text-neutral-500 mb-2 block">Connect</span>
-                        <Link href="https://instagram.com" className="hover:text-neutral-200 dark:hover:text-white transition-colors">Instagram</Link>
-                        <Link href="https://twitter.com" className="hover:text-neutral-200 dark:hover:text-white transition-colors">Twitter</Link>
-                        <Link href="https://linkedin.com" className="hover:text-neutral-200 dark:hover:text-white transition-colors">LinkedIn</Link>
+                        <Link href="https://www.instagram.com/creaneers" target="_blank" className="hover:text-neutral-200 dark:hover:text-white transition-colors">Instagram</Link>
+                        <Link href="https://twitter.com" target="_blank" className="hover:text-neutral-200 dark:hover:text-white transition-colors">Twitter</Link>
+                        <Link href="https://linkedin.com" target="_blank" className="hover:text-neutral-200 dark:hover:text-white transition-colors">LinkedIn</Link>
                     </div>
                     <div className="flex flex-col space-y-4">
                         <span className="text-neutral-400 dark:text-neutral-500 mb-2 block">Sitemap</span>

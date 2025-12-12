@@ -31,6 +31,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                     <time className="text-neutral-500 dark:text-neutral-400 font-mono text-xs uppercase block">
                         Completed {project.date}
                     </time>
+                    {project.siteArea && (
+                        <div className="text-neutral-500 dark:text-neutral-400 font-mono text-xs uppercase block mt-2">
+                            Site Area: {project.siteArea}
+                        </div>
+                    )}
                 </div>
             </div>
 
