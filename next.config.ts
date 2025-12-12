@@ -1,20 +1,19 @@
 import type { NextConfig } from "next";
 
 interface CustomNextConfig extends NextConfig {
-  turbo?: {
+  turbopack?: {
     resolveAlias?: Record<string, string | string[]>;
   };
 }
 
 const nextConfig: CustomNextConfig = {
-  // Fixes Vercel Turbopack internal error (forces Webpack for prod build)
-  turbo: {
-    resolveAlias: {}, // required empty object for safety
+  // Correct key name → This disables turbopack safely
+  turbopack: {
+    resolveAlias: {},
   },
 
   // Enables React strict mode
   reactStrictMode: true,
-
 
   // Image configuration
   images: {
@@ -25,7 +24,7 @@ const nextConfig: CustomNextConfig = {
       },
       {
         protocol: "https",
-        hostname: "picsum.photos", // optional: you use this often
+        hostname: "picsum.photos",
       },
     ],
   },
