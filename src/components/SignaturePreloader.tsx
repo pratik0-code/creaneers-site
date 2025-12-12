@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function SignaturePreloader() {
@@ -9,36 +9,118 @@ export default function SignaturePreloader() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsVisible(false);
-        }, 2500); // Reduced to 2.5s for faster dismissal
+        }, 2200); // Shortened slightly since text is gone
         return () => clearTimeout(timer);
     }, []);
+
+    // Handwritten House Animation - Exact Logo Replication
+    // Path 1: Base Left -> Left Wall -> Roof Peak -> Roof Right limit.
+    // The logo shows the base line connects to the left wall.
+    // Path 2: First Vertical Pillar (Tall)
+    // Path 3: Second Vertical Pillar (Short)
+
+    const drawVariants: Variants = {
+        hidden: { pathLength: 0, opacity: 0 },
+        visible: (custom: number) => ({
+            pathLength: 1,
+            opacity: 1,
+            transition: {
+                pathLength: { delay: custom * 0.4, type: "spring", duration: 1.5, bounce: 0 },
+                opacity: { delay: custom * 0.4, duration: 0.01 }
+            }
+        })
+    };
 
     return (
         <AnimatePresence>
             {isVisible && (
                 <motion.div
-                    className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
+                    className="fixed inset-0 z-[100] flex items-center justify-center bg-zinc-950"
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
                 >
-                    <div className="w-full max-w-4xl px-4">
-                        <svg
-                            viewBox="0 0 800 300"
-                            className="w-full h-auto"
-                        >
-                            <motion.path
-                                d="M 120 160 C 60 160 60 40 140 60 C 160 65 150 120 170 120 C 180 120 180 90 190 90 C 200 90 210 90 195 120 C 190 130 220 130 230 120 C 240 110 230 90 245 90 C 260 90 260 130 245 120 C 240 115 270 120 280 120 C 290 120 290 90 305 90 C 320 90 320 120 330 120 C 340 120 350 120 340 90 C 330 80 360 130 380 120 C 390 120 400 120 390 90 C 380 80 410 130 430 120 C 440 115 430 90 450 90 C 470 90 460 130 490 110 C 500 100 490 90 470 120 M 100 180 C 200 190 400 170 550 180"
+                    <div className="flex items-center gap-6 md:gap-8 translate-y-[-10%]">
+                        {/* Logo Container */}
+                        <div className="w-32 h-32 md:w-40 md:h-40 relative flex-shrink-0">
+                            <svg
+                                viewBox="0 0 200 200"
+                                className="w-full h-full text-white"
                                 fill="none"
                                 stroke="currentColor"
-                                strokeWidth="4"
-                                className="text-neutral-900 dark:text-white"
+                                strokeWidth="10"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 2.0, ease: "easeInOut" }}
-                            />
-                        </svg>
+                            >
+                                {/* Main Outline: Base(Right-to-Left) -> Wall -> Roof Peak -> Roof End */}
+                                <motion.path
+                                    d="M 110 150 L 50 150 L 50 80 L 100 30 L 130 60"
+                                    variants={drawVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                    custom={0}
+                                />
+
+                                {/* Vertical Pillar 1 (Taller) */}
+                                <motion.path
+                                    d="M 150 150 L 150 80"
+                                    variants={drawVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                    custom={1}
+                                />
+
+                                {/* Vertical Pillar 2 (Shorter) */}
+                                <motion.path
+                                    d="M 170 150 L 170 100"
+                                    variants={drawVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                    custom={2}
+                                />
+
+                                {/* Dashed Connector: Bottoms (House Base -> Pillars) */}
+                                <motion.path
+                                    d="M 110 150 L 180 150"
+                                    variants={drawVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                    custom={3}
+                                    strokeDasharray="6 6"
+                                    className="opacity-50"
+                                />
+
+                                {/* Dashed Connector: Tops (Roof Projection) */}
+                                <motion.path
+                                    d="M 130 60 L 180 110"
+                                    variants={drawVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                    custom={4}
+                                    strokeDasharray="6 6"
+                                    className="opacity-50"
+                                />
+                            </svg>
+                        </div>
+
+                        {/* Text Container */}
+                        <div className="flex flex-col text-white">
+                            <motion.h1
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
+                                className="text-4xl md:text-6xl font-bold tracking-tight leading-none"
+                            >
+                                Creaneers
+                            </motion.h1>
+                            <motion.p
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 1.8, duration: 0.8 }}
+                                className="text-sm md:text-lg font-light tracking-[0.3em] uppercase opacity-80 mt-1 md:mt-2"
+                            >
+                                Design & Consults
+                            </motion.p>
+                        </div>
                     </div>
                 </motion.div>
             )}

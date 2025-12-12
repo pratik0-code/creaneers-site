@@ -4,9 +4,14 @@ export default function Footer() {
     return (
         <footer className="bg-neutral-900 text-white py-20 px-6 md:px-12 mt-auto border-t border-neutral-800 dark:border-neutral-800">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start">
-                <div className="mb-10 md:mb-0">
-                    <Link href="/" className="text-4xl font-bold tracking-tighter uppercase block mb-6">
-                        CREANEERS <br></br><span style={{ fontSize: "1rem", marginLeft: "0.5rem" }}>Design & Consults</span>
+                <div>
+                    <Link href="/" className="flex flex-col items-center mb-6 group w-fit">
+                        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-white leading-none mb-1 group-hover:opacity-80 transition-opacity text-center">
+                            CREANEERS
+                        </h2>
+                        <span className="text-xs md:text-sm font-light tracking-[0.2em] text-neutral-400 uppercase block group-hover:text-white transition-colors duration-300 text-center">
+                            Design & Consults
+                        </span>
                     </Link>
                     <p className="text-neutral-300 dark:text-neutral-400 max-w-xs text-sm leading-relaxed">
                         Sculpting spaces that inspire, endure, and elevate the human experience.
@@ -33,6 +38,6 @@ export default function Footer() {
                 <span>© {new Date().getFullYear()} CREANEERS Design and Consult.</span>
                 <span>Made by Pratik Fuyal</span>
             </div>
-        </footer>
+        </footer >
     );
 }
