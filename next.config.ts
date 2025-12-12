@@ -1,21 +1,8 @@
 import type { NextConfig } from "next";
 
-interface CustomNextConfig extends NextConfig {
-  turbopack?: {
-    resolveAlias?: Record<string, string | string[]>;
-  };
-}
-
-const nextConfig: CustomNextConfig = {
-  // Correct key name → This disables turbopack safely
-  turbopack: {
-    resolveAlias: {},
-  },
-
-  // Enables React strict mode
+const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // Image configuration
   images: {
     remotePatterns: [
       {
@@ -29,7 +16,6 @@ const nextConfig: CustomNextConfig = {
     ],
   },
 
-  // Optional path aliases
   webpack: (config) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
