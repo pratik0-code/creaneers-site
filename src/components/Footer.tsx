@@ -31,7 +31,7 @@ export default function Footer() {
 
             <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-neutral-800 dark:border-neutral-800 flex justify-between items-center text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
                 <span>© {new Date().getFullYear()} CREANEERS Architecture.</span>
-                <span>Made with Next.js</span>
+                <span>Made by Pratik Fuyal</span>
             </div>
         </footer>
     );
