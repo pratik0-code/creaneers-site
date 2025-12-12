@@ -81,7 +81,7 @@ export default function Header() {
                 <img
                     src="/icon.png"
                     alt="CREANEERS"
-                    className={`h-10 md:h-14 w-auto object-contain transition-all duration-300 brightness-0 ${isTransparent ? 'invert' : 'dark:invert'}`}
+                    className={`h-10 md:h-12 w-auto object-contain hover:opacity-70 transition-all duration-300 brightness-0 ${isTransparent ? 'invert' : 'dark:invert'}`}
                 />
             </Link>
 

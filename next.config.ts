@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  turbopack: {}, // 👈 Add this line
+
   reactStrictMode: true,
 
   images: {
