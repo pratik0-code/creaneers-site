@@ -6,7 +6,7 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start">
                 <div className="mb-10 md:mb-0">
                     <Link href="/" className="text-4xl font-bold tracking-tighter uppercase block mb-6">
-                        CREANEERS <br></br><span style={{fontSize: "1rem"}}>Design and Consults</span>
+                        CREANEERS <br></br><span style={{ fontSize: "1rem", marginLeft: "0.5rem" }}>Design & Consults</span>
                     </Link>
                     <p className="text-neutral-300 dark:text-neutral-400 max-w-xs text-sm leading-relaxed">
                         Sculpting spaces that inspire, endure, and elevate the human experience.
