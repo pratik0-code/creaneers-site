@@ -20,7 +20,7 @@ export const STORIES: Story[] = [
       <p>This residential project embodies modern living with its sleek design and functional layout. The architecture focuses on maximizing natural light and creating a seamless flow between each room.</p>
     `,
         date: "2024",
-        siteArea: "5,000 sq.ft.",
+        siteArea: "1050 sq.ft.",
         imageUrl: "/images/projects/new-residential/6215.jpg",
         images: [
             "/images/projects/new-residential/6215.jpg",
