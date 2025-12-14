@@ -33,11 +33,11 @@ export const STORIES: Story[] = [
         id: "itahari_interior",
         title: "Itahari Interior",
         category: "Interior",
-        excerpt: "A contemporary residential project located at Itahari, Pachruki.",
+        excerpt: "A contemporary interior project located at Itahari.",
         content: `
-      <p>This residential project embodies modern living with its sleek design and functional layout. The architecture focuses on maximizing natural light and creating a seamless flow between each room.</p>
+      <p>A thoughtfully crafted interior where modern design meets warmth and elegance, enhanced by refined materials, natural light, and subtle detailing.</p>
     `,
-        date: "2024",
+        date: "",
         siteArea: "1050 sq.ft.",
         imageUrl: "/images/projects/itahari interior/living.png",
         images: [
