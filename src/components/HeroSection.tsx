@@ -15,7 +15,7 @@ export default function HeroSection() {
 
             <div className="absolute inset-0 bg-black/40 z-10" />
 
-            <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
+            <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto font-[var(--font-poppins)]">
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 uppercase leading-[0.9]">
                     Design For <br /> <span className="font-serif italic capitalize font-normal">Living</span>
                 </h1>

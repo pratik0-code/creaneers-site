@@ -29,4 +29,26 @@ export const STORIES: Story[] = [
 
         ]
     },
+    {
+        id: "itahari_interior",
+        title: "Itahari Interior",
+        category: "Interior",
+        excerpt: "A contemporary residential project located at Itahari, Pachruki.",
+        content: `
+      <p>This residential project embodies modern living with its sleek design and functional layout. The architecture focuses on maximizing natural light and creating a seamless flow between each room.</p>
+    `,
+        date: "2024",
+        siteArea: "1050 sq.ft.",
+        imageUrl: "/images/projects/itahari interior/living.png",
+        images: [
+            "/images/projects/itahari interior/living.png",
+            "/images/projects/itahari interior/living2.png",
+            "/images/projects/itahari interior/kit2.png",
+            "/images/projects/itahari interior/kit5.png",
+            "/images/projects/itahari interior/kitchen3.png",
+            "/images/projects/itahari interior/bedroom2.png"
+
+
+        ]
+    },
 ];
