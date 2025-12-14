@@ -17,8 +17,7 @@ export const STORIES: Story[] = [
         category: "Residential",
         excerpt: "A contemporary residential project located at Itahari, Pachruki.",
         content: `
-      <p>This residential project embodies modern living with its sleek design and functional layout. The architecture focuses on maximizing natural light and creating a seamless flow between each room.</p>
-    `,
+      <p>This residential project reflects modern architecture with a sleek design and efficient planning. The layout maximizes natural light and ensures a seamless flow between spaces, enhancing comfort and everyday living</p>`,
         date: "2024",
         siteArea: "1050 sq.ft.",
         imageUrl: "/images/projects/Baral_Residence/6216.png",
@@ -35,8 +34,7 @@ export const STORIES: Story[] = [
         category: "Interior",
         excerpt: "A contemporary interior project located at Itahari.",
         content: `
-      <p>A thoughtfully crafted interior where modern design meets warmth and elegance, enhanced by refined materials, natural light, and subtle detailing.</p>
-    `,
+            <p>A modern interior design focused on clean lines, warm textures, and a functional layout. Thoughtful lighting and material selection create a comfortable, elegant, and visually balanced living space</p>    `,
         date: "",
         siteArea: "1050 sq.ft.",
         imageUrl: "/images/projects/itahari interior/living.png",
