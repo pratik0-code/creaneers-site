@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function AboutPage() {
     return (
         <div className="bg-background min-h-screen pt-32 pb-24 px-6 md:px-12">
@@ -27,19 +29,49 @@ export default function AboutPage() {
                     <h4 className="text-sm uppercase tracking-widest font-medium mb-8 text-neutral-900 dark:text-neutral-100">Leadership</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="bg-neutral-50 dark:bg-neutral-900 p-8">
-                            <div className="w-16 h-16 bg-neutral-200 dark:bg-neutral-700 rounded-full mb-4" />
+                            <div className="w-48 h-48 relative rounded-full mb-4 overflow-hidden">
+                                <Image
+                                    src="/images/Professionals/pranav_gautam.JPG"
+                                    alt="Pranav Gautam"
+                                    fill
+                                    quality={100}
+                                    priority
+                                    unoptimized
+                                    className="object-cover"
+                                />
+                            </div>
                             <h5 className="font-serif text-xl text-neutral-900 dark:text-white">Pranav Gautam</h5>
                             <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Founder</p>
                             <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Engineer</p>
                         </div>
                         <div className="bg-neutral-50 dark:bg-neutral-900 p-8">
-                            <div className="w-16 h-16 bg-neutral-200 dark:bg-neutral-700 rounded-full mb-4" />
+                            <div className="w-48 h-48 relative rounded-full mb-4 overflow-hidden">
+                                <Image
+                                    src="/images/Professionals/prayush_giri.JPG"
+                                    alt="Prayush Giri"
+                                    fill
+                                    quality={100}
+                                    priority
+                                    unoptimized
+                                    className="object-cover"
+                                />
+                            </div>
                             <h5 className="font-serif text-xl text-neutral-900 dark:text-white">Prayush Giri</h5>
                             <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Co-Founder</p>
                             <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Architect</p>
                         </div>
                         <div className="bg-neutral-50 dark:bg-neutral-900 p-8">
-                            <div className="w-16 h-16 bg-neutral-200 dark:bg-neutral-700 rounded-full mb-4" />
+                            <div className="w-48 h-48 relative rounded-full mb-4 overflow-hidden">
+                                <Image
+                                    src="/images/Professionals/goveenda_budathoki.JPG"
+                                    alt="Goveenda Budathoki"
+                                    fill
+                                    quality={100}
+                                    priority
+                                    unoptimized
+                                    className="object-cover"
+                                />
+                            </div>
                             <h5 className="font-serif text-xl text-neutral-900 dark:text-white">Goveenda Budathoki</h5>
                             <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Co-Founder</p>
                             <p className="text-sm text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mt-1">Architect</p>
