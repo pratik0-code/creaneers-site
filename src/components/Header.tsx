@@ -86,7 +86,7 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className={`hidden md:flex space-x-8 text-sm uppercase tracking-widest font-light transition-opacity duration-300 ${searchOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+            <nav className={`hidden md:flex space-x-8 text-sm uppercase tracking-widest font-light transition-opacity duration-300 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${searchOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                 <Link href="/works" className="hover:opacity-70 transition-opacity">Works</Link>
                 <Link href="/about" className="hover:opacity-70 transition-opacity">About</Link>
                 <Link href="/contact" className="hover:opacity-70 transition-opacity">Contact</Link>
