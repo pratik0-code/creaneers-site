@@ -93,34 +93,49 @@ export default function Header() {
             </nav>
 
             <div className="flex items-center space-x-6 z-50 relative">
-                {searchOpen ? (
-                    <form onSubmit={handleSearchSubmit} className="flex items-center">
-                        <input
-                            ref={searchInputRef}
-                            type="text"
-                            placeholder="Search projects..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="bg-transparent border-b border-current focus:outline-none w-32 py-1 text-sm font-mono placeholder:text-current/50"
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setSearchOpen(false)}
-                            className="ml-4 hover:opacity-70"
+                <AnimatePresence mode="wait">
+                    {searchOpen ? (
+                        <motion.form
+                            initial={{ width: 0, opacity: 0 }}
+                            animate={{ width: 'auto', opacity: 1 }}
+                            exit={{ width: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                            key="search-form"
+                            onSubmit={handleSearchSubmit}
+                            className="flex items-center overflow-hidden bg-neutral-100 dark:bg-neutral-800 rounded-full px-4 py-1"
                         >
-                            <span className="sr-only">Close</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                        </button>
-                    </form>
-                ) : (
-                    <button
-                        aria-label="Search"
-                        className="hover:opacity-70 transition-opacity hidden md:block"
-                        onClick={() => setSearchOpen(true)}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </button>
-                )}
+                            <input
+                                ref={searchInputRef}
+                                type="text"
+                                placeholder="Search..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="bg-transparent border-none focus:outline-none w-48 text-sm font-light placeholder:text-neutral-400"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setSearchOpen(false)}
+                                className="ml-2 hover:opacity-70 text-neutral-500"
+                            >
+                                <span className="sr-only">Close</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </motion.form>
+                    ) : (
+                        <motion.button
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.2 }}
+                            key="search-btn"
+                            aria-label="Search"
+                            className="hover:opacity-70 transition-opacity hidden md:block"
+                            onClick={() => setSearchOpen(true)}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </motion.button>
+                    )}
+                </AnimatePresence>
 
                 {/* Mobile Menu Toggle */}
                 <button
@@ -140,19 +155,19 @@ export default function Header() {
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center space-y-10 md:hidden"
+                        initial={{ x: '100%' }}
+                        animate={{ x: 0 }}
+                        exit={{ x: '100%' }}
+                        transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                        className="fixed inset-0 bg-background z-40 flex flex-col items-center justify-center space-y-10 md:hidden"
                     >
-                        <form onSubmit={handleSearchSubmit} className="relative w-3/4 max-w-xs mb-4">
+                        <form onSubmit={handleSearchSubmit} className="relative w-3/4 max-w-xs mb-8 flex items-center bg-neutral-100 dark:bg-neutral-800 rounded-full px-6 py-3">
                             <input
                                 type="text"
                                 placeholder="Search projects..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full bg-transparent border-b border-neutral-800 dark:border-white/20 py-2 text-xl font-serif text-center placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 dark:focus:border-white transition-colors"
+                                className="w-full bg-transparent border-none focus:outline-none text-lg text-center placeholder:text-neutral-400 font-light"
                             />
                         </form>
 

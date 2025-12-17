@@ -36,7 +36,7 @@ export default function Footer() {
 
             <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-neutral-800 dark:border-neutral-800 flex justify-between items-center text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
                 <span>© {new Date().getFullYear()} CREANEERS Design and Consult.</span>
-                <span>Made by Pratik Fuyal <br></br>Email: pratikfuyalbusiness@gmail.com</span>
+                <span className="text-[10px] text-neutral-600 dark:text-neutral-600 text-right leading-tight opacity-80">Made by nerdyDev <br />Email: pratikfuyalbusiness@gmail.com</span>
             </div>
         </footer >
     );

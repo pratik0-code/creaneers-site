@@ -6,11 +6,11 @@ interface DisplayCardProps {
     title: string;
     category: string;
     excerpt: string;
-    imageUrl?: string; 
+    imageUrl?: string;
     images?: string[];
 }
 
-export default function DisplayCard({ id, title, category, excerpt, imageUrl, images }:  DisplayCardProps) {
+export default function DisplayCard({ id, title, category, excerpt, imageUrl, images }: DisplayCardProps) {
     const displayImage = imageUrl || (images && images.length > 0 ? images[0] : null);
 
     return (
@@ -21,6 +21,7 @@ export default function DisplayCard({ id, title, category, excerpt, imageUrl, im
                         src={displayImage}
                         alt={title}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                 ) : (

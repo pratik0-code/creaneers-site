@@ -1,7 +1,11 @@
 "use client";
 
+import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const MotionImage = motion(Image);
 
 interface ImageGalleryProps {
     images: string[];
@@ -20,10 +24,12 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
                         className={`relative overflow-hidden group cursor-pointer ${idx % 3 === 0 ? 'md:col-span-2 aspect-[21/9]' : 'aspect-[4/3]'}`}
                         onClick={() => setSelectedImage(img)}
                     >
-                        <motion.img
+                        <MotionImage
                             layoutId={`img-${img}`} // Shared layout ID for smooth transition
                             src={img}
                             alt={`${title} image ${idx + 1}`}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-cover w-full h-full filter grayscale hover:grayscale-0 active:grayscale-0 transition-[filter] duration-500 ease-in-out select-none"
                             style={{ WebkitTouchCallout: 'none' }}
                             onContextMenu={(e) => e.preventDefault()}
