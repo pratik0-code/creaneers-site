@@ -46,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${outfit.className} ${greatVibes.variable} ${poppins.variable} antialiased bg-background text-neutral-900 selection:bg-neutral-900 selection:text-white`}>
+      <body className={`${outfit.className} ${greatVibes.variable} ${poppins.variable}`}>
         <DeveloperSignature />
         <SignaturePreloader />
         <Header />

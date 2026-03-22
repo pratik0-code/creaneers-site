@@ -18,7 +18,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     }
 
     return (
-        <article className="min-h-screen bg-background">
+        <article className="min-h-screen bg-white dark:bg-neutral-950">
             {/* Hero Header for Article */}
             <div className="relative h-[60vh] bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-stone-300 dark:bg-neutral-800 animate-pulse" /> {/* Placeholder Image */}
@@ -26,7 +26,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                     <span className="inline-block border border-black dark:border-white px-4 py-1 text-xs uppercase tracking-widest mb-6 dark:text-white">
                         {project.category}
                     </span>
-                    <h1 className="text-4xl md:text-6xl font-serif mb-4 leading-tight dark:text-white">
+                    <h1 className="text-4xl md:text-6xl font-serif mb-4 leading-tight text-neutral-900 dark:text-white">
                         {project.title}
                     </h1>
                     <time className="text-neutral-500 dark:text-neutral-400 font-mono text-xs uppercase block">
@@ -42,22 +42,22 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
 
             <div className="max-w-3xl mx-auto py-24 px-6">
                 <div
-                    className="prose prose-neutral prose-lg prose-headings:font-serif prose-p:font-light prose-p:leading-loose first-letter:text-5xl first-letter:font-serif first-letter:mr-2 first-letter:float-left dark:prose-invert"
+                    className="prose prose-neutral dark:prose-invert prose-lg prose-headings:font-serif prose-p:font-light prose-p:leading-loose first-letter:text-5xl first-letter:font-serif first-letter:float-left first-letter:mr-2"
                     dangerouslySetInnerHTML={{ __html: project.content }}
                 />
 
-                <hr className="my-16 border-neutral-200 dark:border-neutral-800" />
+                <hr className="my-16 border-t border-neutral-200 dark:border-neutral-800" />
 
                 {/* Project Collage */}
                 {project.images && project.images.length > 0 && (
-                    <div className="mb-16 space-y-4">
+                    <div className="mb-16">
                         <h3 className="text-sm font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-8">Project Gallery</h3>
                         <ImageGallery images={project.images} title={project.title} />
                     </div>
                 )}
 
                 <div className="flex justify-between items-center">
-                    <Link href="/works" className="text-sm uppercase tracking-widest hover:text-neutral-500 dark:text-white dark:hover:text-neutral-400 transition-colors">
+                    <Link href="/works" className="text-sm uppercase tracking-widest text-neutral-900 dark:text-white hover:text-neutral-500 dark:hover:text-neutral-400 transition-colors">
                         ← Back to Projects
                     </Link>
                 </div>

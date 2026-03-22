@@ -21,7 +21,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
                 {images.map((img, idx) => (
                     <div
                         key={idx}
-                        className={`relative overflow-hidden group cursor-pointer ${idx % 3 === 0 ? 'md:col-span-2 aspect-[21/9]' : 'aspect-[4/3]'}`}
+                        className={`relative overflow-hidden cursor-pointer group ${idx % 3 === 0 ? 'aspect-[21/9] md:col-span-2' : 'aspect-[4/3]'}`}
                         onClick={() => setSelectedImage(img)}
                     >
                         <MotionImage
@@ -30,7 +30,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
                             alt={`${title} image ${idx + 1}`}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-cover w-full h-full filter grayscale hover:grayscale-0 active:grayscale-0 transition-[filter] duration-500 ease-in-out select-none"
+                            className="object-cover w-full h-full grayscale transition-all duration-500 ease-in-out group-hover:grayscale-0 pointer-events-none select-none"
                             style={{ WebkitTouchCallout: 'none' }}
                             onContextMenu={(e) => e.preventDefault()}
                             draggable={false}
@@ -58,7 +58,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ delay: 0.2 }}
-                            className="absolute top-6 right-6 text-white hover:text-neutral-300 transition-colors z-50"
+                            className="absolute top-6 right-6 text-white hover:text-neutral-300 z-50 transition-colors bg-none border-none cursor-pointer"
                             onClick={() => setSelectedImage(null)}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -67,7 +67,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
                             </svg>
                         </motion.button>
 
-                        <div className="relative max-w-7xl w-full max-h-[90vh] flex items-center justify-center pointer-events-none">
+                        <div className="relative w-full max-w-7xl max-h-[90vh] flex items-center justify-center pointer-events-none">
                             <motion.img
                                 layoutId={`img-${selectedImage}`} // Matching ID for shared transition
                                 src={selectedImage}

@@ -39,9 +39,9 @@ export default function SignaturePreloader() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
-                    <div className="flex items-center gap-6 md:gap-10 translate-y-[-10%]">
+                    <div className="flex items-center gap-6 md:gap-10 -translate-y-[10%]">
                         {/* Logo Container */}
-                        <div className="w-32 h-32 md:w-40 md:h-40 relative flex-shrink-0">
+                        <div className="w-32 h-32 md:w-40 md:h-40 relative shrink-0">
                             <svg
                                 viewBox="0 0 200 200"
                                 className="w-full h-full text-white"
@@ -110,7 +110,7 @@ export default function SignaturePreloader() {
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
-                                className="text-4xl md:text-5xl tracking-tighter text-white leading-none text-center"
+                                className="text-4xl md:text-5xl tracking-tighter text-white leading-none text-center m-0"
                             >
                                 CREANEERS
                             </motion.h1>

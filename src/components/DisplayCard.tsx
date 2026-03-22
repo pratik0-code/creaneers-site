@@ -14,7 +14,7 @@ export default function DisplayCard({ id, title, category, excerpt, imageUrl, im
     const displayImage = imageUrl || (images && images.length > 0 ? images[0] : null);
 
     return (
-        <Link href={`/works/${id}`} className="group block">
+        <Link href={`/works/${id}`} className="block no-underline cursor-pointer group">
             <div className="relative aspect-[3/4] overflow-hidden bg-neutral-100 dark:bg-neutral-800 mb-4">
                 {displayImage ? (
                     <Image
@@ -22,24 +22,24 @@ export default function DisplayCard({ id, title, category, excerpt, imageUrl, im
                         alt={title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
                     />
                 ) : (
                     <>
                         {/* Placeholder for image */}
-                        <div className="absolute inset-0 bg-stone-200 dark:bg-neutral-800 transition-transform duration-700 group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-stone-200 dark:bg-neutral-800 transition-transform duration-700 ease-in-out group-hover:scale-105" />
                         <div className="absolute inset-0 flex items-center justify-center text-neutral-400 font-light italic">
                             Image
                         </div>
                     </>
                 )}
 
-                <div className="absolute top-4 left-4 bg-white dark:bg-neutral-900 px-3 py-1 text-xs uppercase tracking-widest font-medium dark:text-white z-10">
+                <div className="absolute top-4 left-4 bg-white dark:bg-neutral-900 px-3 py-1 text-xs uppercase tracking-widest font-medium z-10 text-neutral-900 dark:text-white">
                     {category}
                 </div>
             </div>
 
-            <h3 className="text-xl font-serif font-medium mb-2 group-hover:underline decoration-1 underline-offset-4 transition-all text-neutral-900 dark:text-white">
+            <h3 className="text-xl font-serif font-medium mb-2 text-neutral-900 dark:text-white transition-all duration-200 decoration-1 underline-offset-4 group-hover:underline">
                 {title}
             </h3>
             <p className="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed line-clamp-2">
