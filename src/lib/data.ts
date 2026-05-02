@@ -49,4 +49,42 @@ export const STORIES: Story[] = [
 
         ]
     },
+    {
+        id: "glow_with_anu",
+        title: "Glow with Anu- Itahari",
+        category: "Interior",
+        excerpt: "An interior project for Glow with Anu located at Itahari.",
+        content: `
+            <p>A beautifully designed interior space focused on aesthetics and functionality, creating a welcoming and elegant atmosphere for visitors.</p>`,
+        date: "",
+        siteArea: "",
+        imageUrl: "/images/projects/Glow with Anu- Itahari/Image(1).png",
+        images: [
+            "/images/projects/Glow with Anu- Itahari/Image(1).png",
+            "/images/projects/Glow with Anu- Itahari/Image(2).png",
+            "/images/projects/Glow with Anu- Itahari/Scene 1(1).png",
+            "/images/projects/Glow with Anu- Itahari/Scene 3.png",
+            "/images/projects/Glow with Anu- Itahari/Scene 5.png",
+            "/images/projects/Glow with Anu- Itahari/Scene 6.png"
+        ]
+    },
+    {
+        id: "lalbhitti_residence",
+        title: "Lalbhitti Residence",
+        category: "Residential",
+        excerpt: "A residential interior project featuring modern kitchen and living room designs.",
+        content: `
+            <p>A residential interior design that combines comfort and contemporary aesthetics. The living room features elegant decor, while the kitchen is designed for high functionality with a modern touch.</p>`,
+        date: "",
+        siteArea: "",
+        imageUrl: "/images/projects/Lalbhitti Residence/Living room/Image copy.png",
+        images: [
+            "/images/projects/Lalbhitti Residence/Living room/Image copy.png",
+            "/images/projects/Lalbhitti Residence/Living room/Image(1) copy.png",
+            "/images/projects/Lalbhitti Residence/Living room/Image(2) copy.png",
+            "/images/projects/Lalbhitti Residence/Living room/Image(3) copy.png",
+            "/images/projects/Lalbhitti Residence/Kitchen/KITCHEN 1.png",
+            "/images/projects/Lalbhitti Residence/Kitchen/KITCHEN 2.png"
+        ]
+    },
 ];
