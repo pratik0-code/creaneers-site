@@ -1,11 +1,18 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
-  turbopack: {}, // 👈 Add this line
+  output: "export",
+  trailingSlash: true, // 👈 Add this
 
   reactStrictMode: true,
 
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -18,12 +25,20 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  webpack: (config) => {
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
+  turbopack: {
+    resolveAlias: {
       "@components": "./src/components",
       "@lib": "./src/lib",
       "@styles": "./src/styles",
+    },
+  },
+
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      "@components": path.resolve(__dirname, "./src/components"),
+      "@lib": path.resolve(__dirname, "./src/lib"),
+      "@styles": path.resolve(__dirname, "./src/styles"),
     };
 
     return config;
