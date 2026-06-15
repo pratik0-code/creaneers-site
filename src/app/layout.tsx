@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   title: "CREANEERS | Design and Consult",
   description: "Sculpting spaces that inspire, endure, and elevate the human experience.",
   icons: {
-    icon: "/icon.jpg",
+    icon: "/icon.ico",
   },
 };
 
