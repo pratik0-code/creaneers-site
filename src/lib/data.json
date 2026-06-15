@@ -1,19 +1,5 @@
 [
     {
-        "id": "butwal_interior",
-        "title": "Butwal Interior",
-        "category": "Interior",
-        "excerpt": "",
-        "content": "<p></p>",
-        "date": "2026",
-        "siteArea": "",
-        "status": "ongoing",
-        "imageUrl": "/images/projects/butwal_interior/cover.png",
-        "images": [
-            "/images/projects/butwal_interior/cover.png"
-        ]
-    },
-    {
         "id": "baral_residence",
         "title": "Baral Residence",
         "category": "Residential",
