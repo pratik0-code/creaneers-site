@@ -1,5 +1,19 @@
 [
     {
+        "id": "karki_residence",
+        "title": "Karki Residence",
+        "category": "Residential",
+        "excerpt": "adasdasdasd",
+        "content": "<p>asdfsafsdfadfa</p>",
+        "date": "2026",
+        "siteArea": "1050 sq.ft",
+        "imageUrl": "/images/projects/karki_residence/cover.png",
+        "images": [
+            "/images/projects/karki_residence/cover.png",
+            "/images/projects/karki_residence/gallery_1.png"
+        ]
+    },
+    {
         "id": "baral_residence",
         "title": "Baral Residence",
         "category": "Residential",
