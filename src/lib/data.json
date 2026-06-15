@@ -1,5 +1,19 @@
 [
     {
+        "id": "kei_ni_haina_yr",
+        "title": "Kei ni haina yr",
+        "category": "Residential",
+        "excerpt": "sasdas",
+        "content": "<p>asdasdas</p>",
+        "date": "2026",
+        "siteArea": "",
+        "imageUrl": "/images/projects/kei_ni_haina_yr/cover.png",
+        "images": [
+            "/images/projects/kei_ni_haina_yr/cover.png",
+            "/images/projects/kei_ni_haina_yr/gallery_1.png"
+        ]
+    },
+    {
         "id": "baral_residence",
         "title": "Baral Residence",
         "category": "Residential",
