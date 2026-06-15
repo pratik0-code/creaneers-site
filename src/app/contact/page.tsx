@@ -47,7 +47,7 @@ export default function ContactPage() {
                     <div>
                         <span className="block text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">Headquarters</span>
                         <p className="text-xl font-light text-neutral-900 dark:text-neutral-100">
-                            Kathmandu-10, Nepal
+                            Mahalakshmi-03, Lalitpur
                         </p>
                     </div>
                     <div>
