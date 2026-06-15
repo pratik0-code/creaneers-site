@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { initGitHub, fetchProjects, uploadImage, updateProjects } from "@/lib/github-cms";
+import { initGitHub, fetchProjects, saveProjectBatch } from "@/lib/github-cms";
 import { Story } from "@/lib/data";
 
 export default function AdminPage() {
@@ -88,7 +88,7 @@ export default function AdminPage() {
         setMessage("");
         try {
             const updatedProjects = projects.filter(p => p.id !== id);
-            await updateProjects(updatedProjects, sha);
+            await saveProjectBatch(updatedProjects, []);
             const refreshed = await fetchProjects();
             setProjects(refreshed.content);
             setSha(refreshed.sha);
@@ -108,12 +108,14 @@ export default function AdminPage() {
             let uploadedCover = "";
             const uploadedGallery: string[] = [];
 
+            const filesToUpload: { path: string; base64: string }[] = [];
+
             // Upload Cover Image
             if (coverImageFile) {
                 const base64 = await fileToBase64(coverImageFile);
                 const ext = coverImageFile.name.split('.').pop();
                 const path = `public/images/projects/${projectId}/cover.${ext}`;
-                await uploadImage(base64, path);
+                filesToUpload.push({ path, base64 });
                 uploadedCover = `/${path.replace('public/', '')}`;
             }
 
@@ -123,7 +125,7 @@ export default function AdminPage() {
                 const base64 = await fileToBase64(file);
                 const ext = file.name.split('.').pop();
                 const path = `public/images/projects/${projectId}/gallery_${i + 1}.${ext}`;
-                await uploadImage(base64, path);
+                filesToUpload.push({ path, base64 });
                 uploadedGallery.push(`/${path.replace('public/', '')}`);
             }
 
@@ -148,7 +150,7 @@ export default function AdminPage() {
             } else {
                 updatedProjects = [projectToSave, ...projects];
             }
-            await updateProjects(updatedProjects, sha);
+            await saveProjectBatch(updatedProjects, filesToUpload);
 
             // Refresh state
             const refreshed = await fetchProjects();
