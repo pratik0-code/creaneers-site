@@ -30,8 +30,11 @@ export default function Header() {
 
     // Close mobile menu when route changes
     useEffect(() => {
-        setMobileMenuOpen(false);
-        setSearchOpen(false);
+        const handleRouteChange = () => {
+            setMobileMenuOpen(false);
+            setSearchOpen(false);
+        };
+        handleRouteChange();
     }, [pathname]);
 
     useEffect(() => {
