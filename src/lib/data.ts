@@ -10,6 +10,7 @@ export interface Story {
     imageUrl?: string;
     images?: string[];
     siteArea?: string;
+    status?: 'completed' | 'ongoing' | 'idea';
 }
 
 export const STORIES: Story[] = storiesData as Story[];

@@ -22,6 +22,7 @@ export default function AdminPage() {
         content: "",
         date: new Date().getFullYear().toString(),
         siteArea: "",
+        status: "completed",
         imageUrl: "",
         images: []
     });
@@ -138,6 +139,7 @@ export default function AdminPage() {
                 content: `<p>${newProject.content}</p>`,
                 date: newProject.date || "",
                 siteArea: newProject.siteArea || "",
+                status: (newProject.status as 'completed' | 'ongoing' | 'idea') || "completed",
                 imageUrl: uploadedCover || (editingId ? projects.find(p => p.id === editingId)?.imageUrl : ""),
                 images: (uploadedCover || uploadedGallery.length > 0)
                     ? [uploadedCover, ...uploadedGallery].filter(Boolean)
@@ -162,7 +164,7 @@ export default function AdminPage() {
             setCoverImageFile(null);
             setGalleryFiles([]);
             setNewProject({
-                id: "", title: "", category: "Residential", excerpt: "", content: "", date: new Date().getFullYear().toString(), siteArea: "", imageUrl: "", images: []
+                id: "", title: "", category: "Residential", excerpt: "", content: "", date: new Date().getFullYear().toString(), siteArea: "", status: "completed", imageUrl: "", images: []
             });
             setMessage("Project saved successfully! The site will automatically rebuild and deploy soon.");
 
@@ -221,7 +223,7 @@ export default function AdminPage() {
                         <button 
                             onClick={() => {
                                 setEditingId(null);
-                                setNewProject({ id: "", title: "", category: "Residential", excerpt: "", content: "", date: new Date().getFullYear().toString(), siteArea: "", imageUrl: "", images: [] });
+                                setNewProject({ id: "", title: "", category: "Residential", excerpt: "", content: "", date: new Date().getFullYear().toString(), siteArea: "", status: "completed", imageUrl: "", images: [] });
                                 setShowForm(true);
                             }}
                             className="bg-white text-black px-6 py-3 rounded-lg shadow-md hover:bg-neutral-200 transition mb-10 inline-block font-medium"
@@ -237,7 +239,7 @@ export default function AdminPage() {
                                         <li key={p.id} className="py-4 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                                             <div>
                                                 <p className="font-medium text-white">{p.title}</p>
-                                                <p className="text-sm text-neutral-400">{p.category} • {p.date}</p>
+                                                <p className="text-sm text-neutral-400">{p.category} • {p.date} • <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${p.status === 'ongoing' ? 'bg-amber-900/50 text-amber-200' : p.status === 'idea' ? 'bg-blue-900/50 text-blue-200' : 'bg-green-900/50 text-green-200'}`}>{p.status || 'completed'}</span></p>
                                             </div>
                                             <div className="flex gap-3">
                                                 <button onClick={() => handleEditProject(p)} className="text-sm px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded transition">Edit</button>
@@ -281,6 +283,15 @@ export default function AdminPage() {
                                 <label className="block text-sm font-medium text-neutral-300 mb-2">Site Area</label>
                                 <input type="text" className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none" 
                                     value={newProject.siteArea} onChange={e => setNewProject({...newProject, siteArea: e.target.value})} placeholder="e.g. 1050 sq.ft." />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-neutral-300 mb-2">Status</label>
+                                <select className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none"
+                                    value={newProject.status || 'completed'} onChange={e => setNewProject({...newProject, status: e.target.value as 'completed' | 'ongoing' | 'idea'})}>
+                                    <option value="completed">Completed</option>
+                                    <option value="ongoing">Ongoing</option>
+                                    <option value="idea">Idea</option>
+                                </select>
                             </div>
                         </div>
 
