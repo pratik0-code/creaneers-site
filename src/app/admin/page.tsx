@@ -27,6 +27,7 @@ export default function AdminPage() {
     });
     const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
     const [galleryFiles, setGalleryFiles] = useState<File[]>([]);
+    const [editingId, setEditingId] = useState<string | null>(null);
 
     useEffect(() => {
         const savedToken = localStorage.getItem("github_cms_token");
@@ -69,6 +70,35 @@ export default function AdminPage() {
         });
     };
 
+    const handleEditProject = (project: Story) => {
+        setEditingId(project.id);
+        setNewProject({
+            ...project,
+            content: project.content.replace(/<p>/g, '').replace(/<\/p>/g, '') // strip p tags for editing
+        });
+        setCoverImageFile(null);
+        setGalleryFiles([]);
+        setShowForm(true);
+        setMessage("");
+    };
+
+    const handleDeleteProject = async (id: string) => {
+        if (!confirm("Are you sure you want to delete this project?")) return;
+        setLoading(true);
+        setMessage("");
+        try {
+            const updatedProjects = projects.filter(p => p.id !== id);
+            await updateProjects(updatedProjects, sha);
+            const refreshed = await fetchProjects();
+            setProjects(refreshed.content);
+            setSha(refreshed.sha);
+            setMessage("Project deleted successfully!");
+        } catch (error: any) {
+            setMessage("Failed to delete project: " + error.message);
+        }
+        setLoading(false);
+    };
+
     const handleSaveProject = async () => {
         setLoading(true);
         setMessage("");
@@ -99,18 +129,25 @@ export default function AdminPage() {
 
             // Create new project object
             const projectToSave: Story = {
-                id: projectId,
+                id: editingId || projectId,
                 title: newProject.title || "Untitled",
                 category: newProject.category || "Other",
                 excerpt: newProject.excerpt || "",
                 content: `<p>${newProject.content}</p>`,
                 date: newProject.date || "",
                 siteArea: newProject.siteArea || "",
-                imageUrl: uploadedCover,
-                images: [uploadedCover, ...uploadedGallery].filter(Boolean),
+                imageUrl: uploadedCover || (editingId ? projects.find(p => p.id === editingId)?.imageUrl : ""),
+                images: (uploadedCover || uploadedGallery.length > 0)
+                    ? [uploadedCover, ...uploadedGallery].filter(Boolean)
+                    : (editingId ? projects.find(p => p.id === editingId)?.images : []),
             };
 
-            const updatedProjects = [projectToSave, ...projects];
+            let updatedProjects;
+            if (editingId) {
+                updatedProjects = projects.map(p => p.id === editingId ? projectToSave : p);
+            } else {
+                updatedProjects = [projectToSave, ...projects];
+            }
             await updateProjects(updatedProjects, sha);
 
             // Refresh state
@@ -119,6 +156,7 @@ export default function AdminPage() {
             setSha(refreshed.sha);
             
             setShowForm(false);
+            setEditingId(null);
             setCoverImageFile(null);
             setGalleryFiles([]);
             setNewProject({
@@ -179,7 +217,11 @@ export default function AdminPage() {
                 {!showForm ? (
                     <div>
                         <button 
-                            onClick={() => setShowForm(true)}
+                            onClick={() => {
+                                setEditingId(null);
+                                setNewProject({ id: "", title: "", category: "Residential", excerpt: "", content: "", date: new Date().getFullYear().toString(), siteArea: "", imageUrl: "", images: [] });
+                                setShowForm(true);
+                            }}
                             className="bg-white text-black px-6 py-3 rounded-lg shadow-md hover:bg-neutral-200 transition mb-10 inline-block font-medium"
                         >
                             + Add New Project
@@ -190,10 +232,14 @@ export default function AdminPage() {
                             {projects.length === 0 ? <p className="text-neutral-400">No projects found.</p> : (
                                 <ul className="divide-y divide-neutral-800">
                                     {projects.map((p) => (
-                                        <li key={p.id} className="py-4 flex justify-between items-center">
+                                        <li key={p.id} className="py-4 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                                             <div>
                                                 <p className="font-medium text-white">{p.title}</p>
                                                 <p className="text-sm text-neutral-400">{p.category} • {p.date}</p>
+                                            </div>
+                                            <div className="flex gap-3">
+                                                <button onClick={() => handleEditProject(p)} className="text-sm px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded transition">Edit</button>
+                                                <button onClick={() => handleDeleteProject(p.id)} className="text-sm px-4 py-2 bg-red-900/50 hover:bg-red-900/80 text-red-200 rounded transition">Delete</button>
                                             </div>
                                         </li>
                                     ))}
@@ -203,7 +249,9 @@ export default function AdminPage() {
                     </div>
                 ) : (
                     <div className="bg-neutral-900 rounded-xl shadow-sm border border-neutral-800 p-6 md:p-10">
-                        <h2 className="text-2xl font-serif mb-8 border-b border-neutral-800 pb-4 text-white">Add New Project</h2>
+                        <h2 className="text-2xl font-serif mb-8 border-b border-neutral-800 pb-4 text-white">
+                            {editingId ? "Edit Project" : "Add New Project"}
+                        </h2>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
@@ -249,12 +297,12 @@ export default function AdminPage() {
                         <div className="mb-8 bg-neutral-950 p-6 rounded-lg border border-neutral-800">
                             <h3 className="font-medium text-white mb-4">Images</h3>
                             <div className="mb-4">
-                                <label className="block text-sm text-neutral-400 mb-2">Cover Image (Main Image)</label>
+                                <label className="block text-sm text-neutral-400 mb-2">Cover Image (Main Image) {editingId && "- Leave blank to keep existing"}</label>
                                 <input type="file" accept="image/*" className="w-full text-sm text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-neutral-800 file:text-white hover:file:bg-neutral-700"
                                     onChange={e => setCoverImageFile(e.target.files?.[0] || null)} />
                             </div>
                             <div>
-                                <label className="block text-sm text-neutral-400 mb-2">Gallery Images</label>
+                                <label className="block text-sm text-neutral-400 mb-2">Gallery Images {editingId && "- Leave blank to keep existing"}</label>
                                 <input type="file" accept="image/*" multiple className="w-full text-sm text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-neutral-800 file:text-white hover:file:bg-neutral-700"
                                     onChange={e => {
                                         if (e.target.files) setGalleryFiles(Array.from(e.target.files));
@@ -265,13 +313,16 @@ export default function AdminPage() {
                         <div className="flex gap-4">
                             <button 
                                 onClick={handleSaveProject} 
-                                disabled={loading || !newProject.title || !coverImageFile}
+                                disabled={loading || !newProject.title || (!editingId && !coverImageFile)}
                                 className="bg-white text-black px-8 py-3 rounded shadow hover:bg-neutral-200 transition disabled:opacity-50 font-medium"
                             >
                                 {loading ? "Uploading & Saving..." : "Save Project"}
                             </button>
                             <button 
-                                onClick={() => setShowForm(false)} 
+                                onClick={() => {
+                                    setShowForm(false);
+                                    setEditingId(null);
+                                }} 
                                 disabled={loading}
                                 className="bg-neutral-900 border border-neutral-700 text-white px-8 py-3 rounded shadow-sm hover:bg-neutral-800 transition"
                             >
