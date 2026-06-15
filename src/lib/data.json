@@ -1,5 +1,19 @@
 [
     {
+        "id": "butwal_residence",
+        "title": "Butwal Residence",
+        "category": "Residential",
+        "excerpt": "",
+        "content": "<p></p>",
+        "date": "2026",
+        "siteArea": "",
+        "status": "ongoing",
+        "imageUrl": "/images/projects/butwal_residence/cover.jpg",
+        "images": [
+            "/images/projects/butwal_residence/cover.jpg"
+        ]
+    },
+    {
         "id": "baral_residence",
         "title": "Baral Residence",
         "category": "Residential",
