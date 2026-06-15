@@ -8,9 +8,10 @@ interface DisplayCardProps {
     excerpt: string;
     imageUrl?: string;
     images?: string[];
+    status?: 'completed' | 'ongoing' | 'idea';
 }
 
-export default function DisplayCard({ id, title, category, excerpt, imageUrl, images }: DisplayCardProps) {
+export default function DisplayCard({ id, title, category, excerpt, imageUrl, images, status }: DisplayCardProps) {
     const displayImage = imageUrl || (images && images.length > 0 ? images[0] : null);
 
     return (
@@ -34,8 +35,15 @@ export default function DisplayCard({ id, title, category, excerpt, imageUrl, im
                     </>
                 )}
 
-                <div className="absolute top-4 left-4 bg-white dark:bg-neutral-900 px-3 py-1 text-xs uppercase tracking-widest font-medium z-10 text-neutral-900 dark:text-white">
-                    {category}
+                <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
+                    <span className="bg-white dark:bg-neutral-900 px-3 py-1 text-xs uppercase tracking-widest font-medium text-neutral-900 dark:text-white w-fit">
+                        {category}
+                    </span>
+                    {status && status !== 'completed' && (
+                        <span className={`px-3 py-1 text-xs uppercase tracking-widest font-medium w-fit ${status === 'ongoing' ? 'bg-amber-100 text-amber-900 dark:bg-amber-900/80 dark:text-amber-100' : 'bg-blue-100 text-blue-900 dark:bg-blue-900/80 dark:text-blue-100'}`}>
+                            {status}
+                        </span>
+                    )}
                 </div>
             </div>
 

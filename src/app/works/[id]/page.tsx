@@ -30,7 +30,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                         {project.title}
                     </h1>
                     <time className="text-neutral-500 dark:text-neutral-400 font-mono text-xs uppercase block">
-                        Ongoing {project.date}-present
+                        {project.status && project.status !== 'completed' ? `${project.status} ` : ''}{project.date ? project.date : ''}
                     </time>
                     {project.siteArea && (
                         <div className="text-neutral-500 dark:text-neutral-400 font-mono text-xs uppercase block mt-2">
