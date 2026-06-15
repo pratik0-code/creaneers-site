@@ -134,44 +134,44 @@ export default function AdminPage() {
 
     if (!isLoggedIn) {
         return (
-            <div className="min-h-screen bg-neutral-100 flex items-center justify-center p-6">
-                <div className="bg-white p-8 rounded-xl shadow-xl max-w-md w-full">
-                    <h1 className="text-3xl font-serif mb-6 text-center text-neutral-900">Admin Login</h1>
-                    <p className="text-neutral-500 mb-6 text-sm text-center">
+            <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6">
+                <div className="bg-neutral-900 border border-neutral-800 p-8 rounded-xl shadow-xl max-w-md w-full">
+                    <h1 className="text-3xl font-serif mb-6 text-center text-white">Admin Login</h1>
+                    <p className="text-neutral-400 mb-6 text-sm text-center">
                         Enter your GitHub Personal Access Token to manage projects.
                     </p>
                     <input 
                         type="password" 
                         placeholder="GitHub PAT (ghp_...)" 
-                        className="w-full border p-3 rounded mb-4 outline-none focus:ring-2 focus:ring-neutral-800"
+                        className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded mb-4 outline-none focus:ring-2 focus:ring-white"
                         value={token}
                         onChange={(e) => setToken(e.target.value)}
                     />
                     <button 
                         onClick={() => handleLogin(token)}
                         disabled={loading || !token}
-                        className="w-full bg-neutral-900 text-white p-3 rounded font-medium hover:bg-neutral-800 transition disabled:opacity-50"
+                        className="w-full bg-white text-black p-3 rounded font-medium hover:bg-neutral-200 transition disabled:opacity-50"
                     >
                         {loading ? "Authenticating..." : "Login"}
                     </button>
-                    {message && <p className="text-red-500 mt-4 text-center text-sm">{message}</p>}
+                    {message && <p className="text-red-400 mt-4 text-center text-sm">{message}</p>}
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-neutral-50 p-6 md:p-12">
+        <div className="min-h-screen bg-neutral-950 p-6 md:p-12 text-neutral-100">
             <div className="max-w-5xl mx-auto">
                 <div className="flex justify-between items-center mb-10">
-                    <h1 className="text-4xl font-serif text-neutral-900">Admin Dashboard</h1>
-                    <button onClick={handleLogout} className="text-neutral-500 hover:text-neutral-900 underline text-sm">
+                    <h1 className="text-4xl font-serif text-white">Admin Dashboard</h1>
+                    <button onClick={handleLogout} className="text-neutral-400 hover:text-white underline text-sm">
                         Logout
                     </button>
                 </div>
 
                 {message && (
-                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+                    <div className="bg-green-900/50 border border-green-800 text-green-200 px-4 py-3 rounded mb-6">
                         {message}
                     </div>
                 )}
@@ -180,20 +180,20 @@ export default function AdminPage() {
                     <div>
                         <button 
                             onClick={() => setShowForm(true)}
-                            className="bg-neutral-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-neutral-800 transition mb-10 inline-block font-medium"
+                            className="bg-white text-black px-6 py-3 rounded-lg shadow-md hover:bg-neutral-200 transition mb-10 inline-block font-medium"
                         >
                             + Add New Project
                         </button>
 
-                        <div className="bg-white rounded-xl shadow-sm border p-6">
-                            <h2 className="text-xl font-medium mb-6">Current Projects</h2>
-                            {projects.length === 0 ? <p className="text-neutral-500">No projects found.</p> : (
-                                <ul className="divide-y">
+                        <div className="bg-neutral-900 rounded-xl shadow-sm border border-neutral-800 p-6">
+                            <h2 className="text-xl font-medium mb-6 text-white">Current Projects</h2>
+                            {projects.length === 0 ? <p className="text-neutral-400">No projects found.</p> : (
+                                <ul className="divide-y divide-neutral-800">
                                     {projects.map((p) => (
                                         <li key={p.id} className="py-4 flex justify-between items-center">
                                             <div>
-                                                <p className="font-medium text-neutral-900">{p.title}</p>
-                                                <p className="text-sm text-neutral-500">{p.category} • {p.date}</p>
+                                                <p className="font-medium text-white">{p.title}</p>
+                                                <p className="text-sm text-neutral-400">{p.category} • {p.date}</p>
                                             </div>
                                         </li>
                                     ))}
@@ -202,18 +202,18 @@ export default function AdminPage() {
                         </div>
                     </div>
                 ) : (
-                    <div className="bg-white rounded-xl shadow-sm border p-6 md:p-10">
-                        <h2 className="text-2xl font-serif mb-8 border-b pb-4">Add New Project</h2>
+                    <div className="bg-neutral-900 rounded-xl shadow-sm border border-neutral-800 p-6 md:p-10">
+                        <h2 className="text-2xl font-serif mb-8 border-b border-neutral-800 pb-4 text-white">Add New Project</h2>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
-                                <label className="block text-sm font-medium text-neutral-700 mb-2">Project Title</label>
-                                <input type="text" className="w-full border p-3 rounded focus:ring-2 focus:ring-neutral-800 outline-none" 
+                                <label className="block text-sm font-medium text-neutral-300 mb-2">Project Title</label>
+                                <input type="text" className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none" 
                                     value={newProject.title} onChange={e => setNewProject({...newProject, title: e.target.value})} />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-neutral-700 mb-2">Category</label>
-                                <select className="w-full border p-3 rounded focus:ring-2 focus:ring-neutral-800 outline-none"
+                                <label className="block text-sm font-medium text-neutral-300 mb-2">Category</label>
+                                <select className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none"
                                     value={newProject.category} onChange={e => setNewProject({...newProject, category: e.target.value})}>
                                     <option>Residential</option>
                                     <option>Commercial</option>
@@ -223,39 +223,39 @@ export default function AdminPage() {
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-neutral-700 mb-2">Year / Date</label>
-                                <input type="text" className="w-full border p-3 rounded focus:ring-2 focus:ring-neutral-800 outline-none" 
+                                <label className="block text-sm font-medium text-neutral-300 mb-2">Year / Date</label>
+                                <input type="text" className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none" 
                                     value={newProject.date} onChange={e => setNewProject({...newProject, date: e.target.value})} />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-neutral-700 mb-2">Site Area</label>
-                                <input type="text" className="w-full border p-3 rounded focus:ring-2 focus:ring-neutral-800 outline-none" 
+                                <label className="block text-sm font-medium text-neutral-300 mb-2">Site Area</label>
+                                <input type="text" className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none" 
                                     value={newProject.siteArea} onChange={e => setNewProject({...newProject, siteArea: e.target.value})} placeholder="e.g. 1050 sq.ft." />
                             </div>
                         </div>
 
                         <div className="mb-6">
-                            <label className="block text-sm font-medium text-neutral-700 mb-2">Short Excerpt (shows on home page)</label>
-                            <textarea className="w-full border p-3 rounded focus:ring-2 focus:ring-neutral-800 outline-none h-24"
+                            <label className="block text-sm font-medium text-neutral-300 mb-2">Short Excerpt (shows on home page)</label>
+                            <textarea className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none h-24"
                                 value={newProject.excerpt} onChange={e => setNewProject({...newProject, excerpt: e.target.value})} />
                         </div>
 
                         <div className="mb-8">
-                            <label className="block text-sm font-medium text-neutral-700 mb-2">Full Content / Description</label>
-                            <textarea className="w-full border p-3 rounded focus:ring-2 focus:ring-neutral-800 outline-none h-40"
+                            <label className="block text-sm font-medium text-neutral-300 mb-2">Full Content / Description</label>
+                            <textarea className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none h-40"
                                 value={newProject.content} onChange={e => setNewProject({...newProject, content: e.target.value})} />
                         </div>
 
-                        <div className="mb-8 bg-neutral-50 p-6 rounded-lg border">
-                            <h3 className="font-medium mb-4">Images</h3>
+                        <div className="mb-8 bg-neutral-950 p-6 rounded-lg border border-neutral-800">
+                            <h3 className="font-medium text-white mb-4">Images</h3>
                             <div className="mb-4">
-                                <label className="block text-sm text-neutral-600 mb-2">Cover Image (Main Image)</label>
-                                <input type="file" accept="image/*" className="w-full text-sm"
+                                <label className="block text-sm text-neutral-400 mb-2">Cover Image (Main Image)</label>
+                                <input type="file" accept="image/*" className="w-full text-sm text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-neutral-800 file:text-white hover:file:bg-neutral-700"
                                     onChange={e => setCoverImageFile(e.target.files?.[0] || null)} />
                             </div>
                             <div>
-                                <label className="block text-sm text-neutral-600 mb-2">Gallery Images</label>
-                                <input type="file" accept="image/*" multiple className="w-full text-sm"
+                                <label className="block text-sm text-neutral-400 mb-2">Gallery Images</label>
+                                <input type="file" accept="image/*" multiple className="w-full text-sm text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-neutral-800 file:text-white hover:file:bg-neutral-700"
                                     onChange={e => {
                                         if (e.target.files) setGalleryFiles(Array.from(e.target.files));
                                     }} />
@@ -266,14 +266,14 @@ export default function AdminPage() {
                             <button 
                                 onClick={handleSaveProject} 
                                 disabled={loading || !newProject.title || !coverImageFile}
-                                className="bg-neutral-900 text-white px-8 py-3 rounded shadow hover:bg-neutral-800 transition disabled:opacity-50 font-medium"
+                                className="bg-white text-black px-8 py-3 rounded shadow hover:bg-neutral-200 transition disabled:opacity-50 font-medium"
                             >
                                 {loading ? "Uploading & Saving..." : "Save Project"}
                             </button>
                             <button 
                                 onClick={() => setShowForm(false)} 
                                 disabled={loading}
-                                className="bg-white border text-neutral-700 px-8 py-3 rounded shadow-sm hover:bg-neutral-50 transition"
+                                className="bg-neutral-900 border border-neutral-700 text-white px-8 py-3 rounded shadow-sm hover:bg-neutral-800 transition"
                             >
                                 Cancel
                             </button>
