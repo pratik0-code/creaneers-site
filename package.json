@@ -10,6 +10,7 @@
     "deploy": "next build && echo 'creaneers.com.np' > out/CNAME && type nul > out/.nojekyll && gh-pages -d out -t"
   },
   "dependencies": {
+    "@octokit/rest": "^22.0.1",
     "framer-motion": "^12.23.26",
     "next": "^15.5.15",
     "react": "19.2.1",
