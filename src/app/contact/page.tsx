@@ -51,12 +51,23 @@ export default function ContactPage() {
                         </p>
                     </div>
                     <div>
-                        <span className="block text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">Contact</span>
-                        <p className="text-xl font-light text-neutral-900 dark:text-neutral-100">
-                            +977 9868627913<br></br>
-                            +977 9847690957<br></br>
-                            +977 9804328347<br></br>
-                        </p>
+                        <span className="block text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-4">Contact</span>
+                        <div className="flex flex-col space-y-5">
+                            <div>
+                                <span className="block text-xs font-medium text-green-600 dark:text-green-400 mb-1 uppercase tracking-wider">WhatsApp</span>
+                                <p className="text-xl font-light text-neutral-900 dark:text-neutral-100">
+                                    +977 9857835959
+                                </p>
+                            </div>
+                            <div>
+                                <span className="block text-xs font-medium text-neutral-500 dark:text-neutral-400 mb-1 uppercase tracking-wider">Phone</span>
+                                <p className="text-xl font-light text-neutral-900 dark:text-neutral-100">
+                                    +977 9868627913<br />
+                                    +977 9804328347<br />
+                                    +977 9847690957
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
