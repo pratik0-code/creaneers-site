@@ -1,19 +1,5 @@
 [
     {
-        "id": "sushma_godawari_college",
-        "title": "Sushma Godawari College",
-        "category": "Interior",
-        "excerpt": "",
-        "content": "<p></p>",
-        "date": "2025",
-        "siteArea": "1600 sq.ft",
-        "status": "completed",
-        "imageUrl": "/images/projects/sushma_godawari_college/cover.png",
-        "images": [
-            "/images/projects/sushma_godawari_college/gallery_1.png"
-        ]
-    },
-    {
         "id": "baral_residence",
         "title": "Baral Residence",
         "category": "Residential",
