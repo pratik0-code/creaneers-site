@@ -42,7 +42,7 @@
         "content": "<p>A beautifully designed interior space focused on aesthetics and functionality, creating a welcoming and elegant atmosphere for visitors.</p>",
         "date": "2026",
         "siteArea": "",
-        "status": "ongoing",
+        "status": "completed",
         "imageUrl": "/images/projects/Glow with Anu- Itahari/Image(1).png",
         "images": [
             "/images/projects/Glow with Anu- Itahari/Image(1).png",
@@ -70,6 +70,57 @@
             "/images/projects/Lalbhitti Residence/Living room/Image(3) copy.png",
             "/images/projects/Lalbhitti Residence/Kitchen/KITCHEN 1.png",
             "/images/projects/Lalbhitti Residence/Kitchen/KITCHEN 2.png"
+        ]
+    },
+    {
+        "id": "sushma_godawari_college",
+        "title": "Sushma Godawari College",
+        "category": "Institutional",
+        "excerpt": "...",
+        "content": "<p>...</p>",
+        "date": "2024",
+        "siteArea": "",
+        "status": "completed",
+        "imageUrl": "/images/projects/sushma_college/1.png",
+        "images": [
+            "/images/projects/sushma_college/1.png",
+            "/images/projects/sushma_college/2.png",
+            "/images/projects/sushma_college/3.png"
+            
+        ]
+    },
+    {
+        "id": "tesla_diagnostics",
+        "title": "Tesla Diagnostics Center",
+        "category": "Clinical",
+        "excerpt": "...",
+        "content": "<p>...</p>",
+        "date": "2024",
+        "siteArea": "",
+        "status": "completed",
+        "imageUrl": "/images/projects/tesla_diagnostics/rcptn.png",
+        "images": [
+            "/images/projects/tesla_diagnostics/rcptn.png",
+            "/images/projects/tesla_diagnostics/ctscan.png",
+            "/images/projects/tesla_diagnostics/scene3.png"
+            
+        ]
+    },
+    {
+        "id": "hotel_scenario",
+        "title": "Hotel Scenario",
+        "category": "Interior",
+        "excerpt": "...",
+        "content": "<p>...</p>",
+        "date": "2024",
+        "siteArea": "",
+        "status": "completed",
+        "imageUrl": "/images/projects/hotel_scenario/cover.jpg",
+        "images": [
+            "/images/projects/hotel_scenario/cover.jpg",
+            "/images/projects/hotel_scenario/rm1.png",
+            "/images/projects/hotel_scenario/rm2.png"
+            
         ]
     }
 ]
