@@ -1,4 +1,7 @@
 import { Octokit } from '@octokit/rest';
+import type { RestEndpointMethodTypes } from '@octokit/rest';
+
+type TreeItem = RestEndpointMethodTypes["git"]["createTree"]["parameters"]["tree"][number];
 
 const REPO_OWNER = 'pratik0-code';
 const REPO_NAME = 'creaneers-site';
@@ -62,7 +65,7 @@ export const saveProjectBatch = async (projects: object[], files: FileToUpload[]
         const baseTreeSha = commitData.tree.sha;
 
         // 3. Create Blobs for files
-        const treeItems: { path: string; mode: string; type: string; sha: string }[] = [];
+        const treeItems: TreeItem[] = [];
 
         // Upload images
         for (const file of files) {
