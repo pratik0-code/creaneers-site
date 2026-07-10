@@ -24,12 +24,12 @@ export const metadata: Metadata = {
   title: "CREANEERS | Design and Consult",
   description: "Sculpting spaces that inspire, endure, and elevate the human experience.",
   icons: {
-    icon: "/icon.png",
+    icon: "/icon.jpg",
   },
   openGraph: {
     title: "CREANEERS | Design and Consult",
     description: "Sculpting spaces that inspire, endure, and elevate the human experience.",
-    images: [{ url: "/icon.png" }],
+    images: [{ url: "/icon.jpg" }],
     siteName: "CREANEERS",
   },
 };
