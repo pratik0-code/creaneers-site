@@ -86,7 +86,6 @@
             "/images/projects/sushma_college/1.png",
             "/images/projects/sushma_college/2.png",
             "/images/projects/sushma_college/3.png"
-            
         ]
     },
     {
@@ -103,14 +102,13 @@
             "/images/projects/tesla_diagnostics/rcptn.png",
             "/images/projects/tesla_diagnostics/ctscan.png",
             "/images/projects/tesla_diagnostics/scene3.png"
-            
         ]
     },
     {
         "id": "hotel_scenario",
         "title": "Hotel Scenario",
         "category": "Interior",
-        "excerpt": "...",
+        "excerpt": "A very lavish and luxurious hotel based on itahari",
         "content": "<p>...</p>",
         "date": "2024",
         "siteArea": "",
@@ -120,7 +118,6 @@
             "/images/projects/hotel_scenario/cover.jpg",
             "/images/projects/hotel_scenario/rm1.png",
             "/images/projects/hotel_scenario/rm2.png"
-            
         ]
     }
 ]
