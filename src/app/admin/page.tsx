@@ -62,6 +62,7 @@ export default function AdminPage() {
     useEffect(() => {
         const savedToken = localStorage.getItem("github_cms_token");
         if (savedToken) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             handleLogin(savedToken);
         }
     }, [handleLogin]);
