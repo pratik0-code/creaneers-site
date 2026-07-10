@@ -28,6 +28,7 @@ export default function Footer() {
                     <div className="flex flex-col space-y-4">
                         <span className="text-neutral-400 dark:text-neutral-500 mb-2 block">Sitemap</span>
                         <Link href="/works" className="text-inherit hover:text-neutral-200 dark:hover:text-white transition-colors no-underline">Works</Link>
+                        <Link href="/blog" className="text-inherit hover:text-neutral-200 dark:hover:text-white transition-colors no-underline">Blog</Link>
                         <Link href="/about" className="text-inherit hover:text-neutral-200 dark:hover:text-white transition-colors no-underline">About</Link>
                         <Link href="/contact" className="text-inherit hover:text-neutral-200 dark:hover:text-white transition-colors no-underline">Contact</Link>
                     </div>

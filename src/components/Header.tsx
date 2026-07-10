@@ -93,6 +93,7 @@ export default function Header() {
             {/* Desktop Nav */}
             <nav className={`hidden md:flex space-x-8 text-sm uppercase tracking-widest font-light transition-opacity duration-300 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${searchOpen ? 'opacity-0 pointer-events-none' : ''}`}>
                 <Link href="/works" className="hover:opacity-70 transition-opacity text-inherit no-underline">Works</Link>
+                <Link href="/blog" className="hover:opacity-70 transition-opacity text-inherit no-underline">Blog</Link>
                 <Link href="/about" className="hover:opacity-70 transition-opacity text-inherit no-underline">About</Link>
                 <Link href="/contact" className="hover:opacity-70 transition-opacity text-inherit no-underline">Contact</Link>
             </nav>
@@ -177,6 +178,7 @@ export default function Header() {
                         </form>
 
                         <Link href="/works" className="text-4xl font-serif text-neutral-900 dark:text-white hover:italic transition-all duration-300 no-underline" onClick={() => setMobileMenuOpen(false)}>Works</Link>
+                        <Link href="/blog" className="text-4xl font-serif text-neutral-900 dark:text-white hover:italic transition-all duration-300 no-underline" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
                         <Link href="/about" className="text-4xl font-serif text-neutral-900 dark:text-white hover:italic transition-all duration-300 no-underline" onClick={() => setMobileMenuOpen(false)}>About</Link>
                         <Link href="/contact" className="text-4xl font-serif text-neutral-900 dark:text-white hover:italic transition-all duration-300 no-underline" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
 
