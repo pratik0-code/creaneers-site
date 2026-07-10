@@ -24,7 +24,19 @@ export const metadata: Metadata = {
   title: "CREANEERS | Design and Consult",
   description: "Sculpting spaces that inspire, endure, and elevate the human experience.",
   icons: {
-    icon: "/icon.ico",
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: "/icon.png",
+  },
+  openGraph: {
+    title: "CREANEERS | Design and Consult",
+    description: "Sculpting spaces that inspire, endure, and elevate the human experience.",
+    images: [{ url: "/icon.png" }],
+    siteName: "CREANEERS",
   },
 };
 
