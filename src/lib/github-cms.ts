@@ -41,7 +41,7 @@ export interface FileToUpload {
 }
 
 // Batch update images and data.json into a SINGLE commit to prevent traffic jams
-export const saveProjectBatch = async (projects: any[], files: FileToUpload[]) => {
+export const saveProjectBatch = async (projects: object[], files: FileToUpload[]) => {
     if (!octokit) throw new Error("GitHub not initialized");
 
     try {
@@ -62,7 +62,7 @@ export const saveProjectBatch = async (projects: any[], files: FileToUpload[]) =
         const baseTreeSha = commitData.tree.sha;
 
         // 3. Create Blobs for files
-        const treeItems: any[] = [];
+        const treeItems: { path: string; mode: string; type: string; sha: string }[] = [];
 
         // Upload images
         for (const file of files) {
@@ -128,11 +128,11 @@ export const saveProjectBatch = async (projects: any[], files: FileToUpload[]) =
 };
 
 // @deprecated - Use saveProjectBatch instead
-export const uploadImage = async (fileBase64: string, path: string) => {
+export const uploadImage = async (_fileBase64: string, _path: string) => {
     throw new Error("uploadImage is deprecated. Use saveProjectBatch.");
 };
 
 // @deprecated - Use saveProjectBatch instead
-export const updateProjects = async (projects: any[], sha?: string) => {
+export const updateProjects = async (_projects: object[], _sha?: string) => {
     throw new Error("updateProjects is deprecated. Use saveProjectBatch.");
 };

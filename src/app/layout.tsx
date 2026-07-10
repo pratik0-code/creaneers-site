@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Geist, Geist_Mono, Great_Vibes, Poppins } from "next/font/google";
+import { Outfit, Great_Vibes, Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,21 +8,10 @@ import DeveloperSignature from "@/components/DeveloperSignature";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-poppins",
-});
-
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
 });
 
 const greatVibes = Great_Vibes({

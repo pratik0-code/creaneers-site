@@ -8,7 +8,7 @@ export default function AboutPage() {
 
                 <div className="prose prose-lg prose-p:font-light prose-p:leading-loose">
                     <p className="text-xl md:text-2xl font-serif italic text-neutral-900 dark:text-neutral-100 mb-12 leading-loose">
-                        "We build not just structures, but experiences. We engineer dreams into concrete reality."
+                        &ldquo;We build not just structures, but experiences. We engineer dreams into concrete reality.&rdquo;
                     </p>
 
                     <p className="text-neutral-800 dark:text-neutral-300 mb-6 leading-relaxed">

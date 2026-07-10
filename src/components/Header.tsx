@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Outfit } from 'next/font/google';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -64,7 +65,7 @@ export default function Header() {
     const isTransparent = isHome && !scrolled && !searchOpen;
 
     const getHeaderClasses = () => {
-        let classes = `${outfit.className} fixed top-0 w-full z-50 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300`;
+        const classes = `${outfit.className} fixed top-0 w-full z-50 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300`;
 
         if (mobileMenuOpen) {
             return `${classes} bg-transparent text-neutral-900 dark:text-white`;
@@ -80,9 +81,11 @@ export default function Header() {
     return (
         <header className={getHeaderClasses()}>
             <Link href="/" className="z-50 relative flex items-center">
-                <img
+                <Image
                     src="/icon.png"
                     alt="CREANEERS"
+                    width={112}
+                    height={28}
                     className={`h-6 md:h-7 w-auto object-contain transition-all duration-300 brightness-0 hover:opacity-70 ${isTransparent ? 'invert' : 'dark:invert'}`}
                 />
             </Link>

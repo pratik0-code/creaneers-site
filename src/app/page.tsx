@@ -44,7 +44,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <span className="text-xs font-mono text-neutral-400 mb-6 block uppercase tracking-widest">Our Philosophy</span>
           <h3 className="text-3xl md:text-5xl font-serif italic leading-tight mb-8">
-            "Architecture is the learned game, correct and magnificent, of forms assembled in the light."
+            &ldquo;Architecture is the learned game, correct and magnificent, of forms assembled in the light.&rdquo;
           </h3>
           <Link href="/about" className="inline-block bg-white text-black px-8 py-3 rounded-full text-sm font-medium transition-colors hover:bg-neutral-200">
             Read Our Vision

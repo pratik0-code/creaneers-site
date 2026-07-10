@@ -26,7 +26,7 @@ export default function ContactPage() {
             } else {
                 setStatus('error');
             }
-        } catch (error) {
+        } catch (_error) {
             setStatus('error');
         }
     }
@@ -36,7 +36,7 @@ export default function ContactPage() {
             <div className="flex-1">
                 <h1 className="text-5xl md:text-7xl font-serif mb-12 text-neutral-900 dark:text-white">Contact Us</h1>
                 <p className="text-lg font-light text-neutral-800 dark:text-neutral-200 max-w-md mb-12">
-                    Ready to build something extraordinary? Let's start the conversation.
+                    Ready to build something extraordinary? Let&apos;s start the conversation.
                 </p>
 
                 <div className="flex flex-col space-y-8">
@@ -77,7 +77,7 @@ export default function ContactPage() {
                     <div className="h-full flex flex-col items-center justify-center text-center min-h-[400px]">
                         <div className="text-4xl text-green-500 mb-4">✓</div>
                         <h3 className="text-2xl font-serif text-neutral-900 dark:text-white mb-2">Message Sent</h3>
-                        <p className="text-neutral-600 dark:text-neutral-400">Thank you for reaching out. We'll get back to you shortly.</p>
+                        <p className="text-neutral-600 dark:text-neutral-400">Thank you for reaching out. We&apos;ll get back to you shortly.</p>
                         <button
                             onClick={() => setStatus('idle')}
                             className="mt-6 text-xs uppercase tracking-widest border-b border-black dark:border-white pb-1 bg-none cursor-pointer text-neutral-900 dark:text-white"

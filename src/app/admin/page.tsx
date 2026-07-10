@@ -30,14 +30,6 @@ export default function AdminPage() {
     const [galleryFiles, setGalleryFiles] = useState<File[]>([]);
     const [editingId, setEditingId] = useState<string | null>(null);
 
-    useEffect(() => {
-        const savedToken = localStorage.getItem("github_cms_token");
-        if (savedToken) {
-            setToken(savedToken);
-            handleLogin(savedToken);
-        }
-    }, []);
-
     const handleLogin = async (authToken: string) => {
         setLoading(true);
         setMessage("");
@@ -48,12 +40,21 @@ export default function AdminPage() {
             setSha(sha);
             setIsLoggedIn(true);
             localStorage.setItem("github_cms_token", authToken);
-        } catch (error: any) {
-            setMessage(error.message);
+        } catch (error: unknown) {
+            setMessage(error instanceof Error ? error.message : "Authentication failed");
             localStorage.removeItem("github_cms_token");
         }
         setLoading(false);
     };
+
+    useEffect(() => {
+        const savedToken = localStorage.getItem("github_cms_token");
+        if (savedToken) {
+            setToken(savedToken);
+            handleLogin(savedToken);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("github_cms_token");
@@ -94,8 +95,8 @@ export default function AdminPage() {
             setProjects(refreshed.content);
             setSha(refreshed.sha);
             setMessage("Project deleted successfully!");
-        } catch (error: any) {
-            setMessage("Failed to delete project: " + error.message);
+        } catch (error: unknown) {
+            setMessage("Failed to delete project: " + (error instanceof Error ? error.message : "Unknown error"));
         }
         setLoading(false);
     };
@@ -168,8 +169,8 @@ export default function AdminPage() {
             });
             setMessage("Project saved successfully! The site will automatically rebuild and deploy soon.");
 
-        } catch (error: any) {
-            setMessage("Failed to save project: " + error.message);
+        } catch (error: unknown) {
+            setMessage("Failed to save project: " + (error instanceof Error ? error.message : "Unknown error"));
         }
         setLoading(false);
     };
