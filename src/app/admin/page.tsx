@@ -26,6 +26,9 @@ export default function AdminPage() {
     const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
     const [galleryFiles, setGalleryFiles] = useState<File[]>([]);
     const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
+    const [customCategory, setCustomCategory] = useState("");
+
+    const PRESET_CATEGORIES = ["Residential", "Commercial", "Interior", "Public", "Institutional", "Clinical", "Other"];
 
     // ── Blog state ───────────────────────────────────────────────────────────
     const [blogs, setBlogs] = useState<BlogPost[]>([]);
@@ -92,6 +95,8 @@ export default function AdminPage() {
     const handleEditProject = (project: Story) => {
         setEditingProjectId(project.id);
         setNewProject({ ...project, content: project.content.replace(/<p>/g, "").replace(/<\/p>/g, "") });
+        // If the saved category is a custom one (not in presets), restore it into the custom input
+        setCustomCategory(!PRESET_CATEGORIES.includes(project.category) ? project.category : "");
         setCoverImageFile(null);
         setGalleryFiles([]);
         setShowProjectForm(true);
@@ -372,16 +377,39 @@ export default function AdminPage() {
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-neutral-300 mb-2">Category</label>
-                                        <select className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none"
-                                            value={newProject.category} onChange={(e) => setNewProject({ ...newProject, category: e.target.value })}>
-                                            <option>Residential</option>
-                                            <option>Commercial</option>
-                                            <option>Interior</option>
-                                            <option>Public</option>
-                                            <option>Institutional</option>
-                                            <option>Clinical</option>
-                                            <option>Other</option>
+                                        <select
+                                            className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none"
+                                            value={PRESET_CATEGORIES.includes(newProject.category ?? "") ? newProject.category : "Other"}
+                                            onChange={(e) => {
+                                                if (e.target.value !== "Other") {
+                                                    setCustomCategory("");
+                                                    setNewProject({ ...newProject, category: e.target.value });
+                                                } else {
+                                                    setNewProject({ ...newProject, category: customCategory || "Other" });
+                                                }
+                                            }}
+                                        >
+                                            {PRESET_CATEGORIES.map((cat) => (
+                                                <option key={cat}>{cat}</option>
+                                            ))}
                                         </select>
+                                        {/* Conditional custom input shown when "Other" is selected */}
+                                        {(newProject.category === "Other" || (!PRESET_CATEGORIES.includes(newProject.category ?? "") && newProject.category !== "")) && (
+                                            <div className="mt-3 flex items-center gap-2">
+                                                <span className="text-neutral-500 text-xs uppercase tracking-widest whitespace-nowrap">Specify:</span>
+                                                <input
+                                                    type="text"
+                                                    autoFocus
+                                                    placeholder="e.g. Hospitality, Landscape..."
+                                                    className="flex-1 bg-neutral-950 border border-dashed border-neutral-600 text-white p-2 rounded focus:ring-2 focus:ring-white outline-none text-sm transition-all"
+                                                    value={PRESET_CATEGORIES.includes(newProject.category ?? "") ? customCategory : (newProject.category ?? "")}
+                                                    onChange={(e) => {
+                                                        setCustomCategory(e.target.value);
+                                                        setNewProject({ ...newProject, category: e.target.value || "Other" });
+                                                    }}
+                                                />
+                                            </div>
+                                        )}
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-neutral-300 mb-2">Year / Date</label>
