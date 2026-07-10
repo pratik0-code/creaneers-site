@@ -1,6 +1,7 @@
 import { BLOGS } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -40,10 +41,13 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="relative h-[55vh] min-h-[400px] bg-neutral-100 dark:bg-neutral-900 overflow-hidden flex items-end">
                 {post.coverImage ? (
                     <>
-                        <img
+                        <Image
                             src={post.coverImage}
                             alt={post.title}
-                            className="absolute inset-0 w-full h-full object-cover"
+                            fill
+                            sizes="100vw"
+                            className="object-cover"
+                            priority
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                     </>

@@ -1,6 +1,7 @@
 import { BLOGS } from '@/lib/data';
 import BlogCard from '@/components/BlogCard';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -52,11 +53,15 @@ export default function BlogPage() {
                                     <article className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
                                         <div className="relative aspect-[4/3] bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
                                             {published[0].coverImage ? (
-                                                <img
-                                                    src={published[0].coverImage}
-                                                    alt={published[0].title}
-                                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                                />
+                                                <div className="absolute inset-0">
+                                                    <Image
+                                                        src={published[0].coverImage}
+                                                        alt={published[0].title}
+                                                        fill
+                                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                                    />
+                                                </div>
                                             ) : (
                                                 <div className="absolute inset-0 bg-gradient-to-br from-neutral-200 to-neutral-300 dark:from-neutral-800 dark:to-neutral-700" />
                                             )}

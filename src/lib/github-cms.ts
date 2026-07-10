@@ -131,11 +131,13 @@ export const saveProjectBatch = async (projects: object[], files: FileToUpload[]
 };
 
 // @deprecated - Use saveProjectBatch instead
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const uploadImage = async (_fileBase64: string, _path: string) => {
     throw new Error("uploadImage is deprecated. Use saveProjectBatch.");
 };
 
 // @deprecated - Use saveProjectBatch instead
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const updateProjects = async (_projects: object[], _sha?: string) => {
     throw new Error("updateProjects is deprecated. Use saveProjectBatch.");
 };

@@ -16,7 +16,6 @@ export default function AdminPage() {
 
     // ── Projects state ──────────────────────────────────────────────────────
     const [projects, setProjects] = useState<Story[]>([]);
-    const [sha, setSha] = useState<string | undefined>();
     const [showProjectForm, setShowProjectForm] = useState(false);
     const [newProject, setNewProject] = useState<Partial<Story>>({
         id: "", title: "", category: "Residential", excerpt: "", content: "",
@@ -49,7 +48,6 @@ export default function AdminPage() {
             initGitHub(authToken);
             const [projectRes, blogRes] = await Promise.all([fetchProjects(), fetchBlogs()]);
             setProjects(projectRes.content);
-            setSha(projectRes.sha);
             setBlogs(blogRes.content);
             setIsLoggedIn(true);
             localStorage.setItem("github_cms_token", authToken);
@@ -64,7 +62,6 @@ export default function AdminPage() {
     useEffect(() => {
         const savedToken = localStorage.getItem("github_cms_token");
         if (savedToken) {
-            setToken(savedToken);
             handleLogin(savedToken);
         }
     }, [handleLogin]);
@@ -335,6 +332,7 @@ export default function AdminPage() {
                                 <button
                                     onClick={() => {
                                         setEditingProjectId(null);
+                                        setCustomCategory("");
                                         setNewProject({ id: "", title: "", category: "Residential", excerpt: "", content: "", date: new Date().getFullYear().toString(), siteArea: "", status: "completed", imageUrl: "", images: [] });
                                         setShowProjectForm(true);
                                     }}
