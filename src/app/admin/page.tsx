@@ -109,7 +109,6 @@ export default function AdminPage() {
             await saveProjectBatch(updated, []);
             const refreshed = await fetchProjects();
             setProjects(refreshed.content);
-            setSha(refreshed.sha);
             showMsg("Project deleted successfully!");
         } catch (error: unknown) {
             showMsg("Failed to delete project: " + (error instanceof Error ? error.message : "Unknown error"), "error");
@@ -165,7 +164,6 @@ export default function AdminPage() {
             await saveProjectBatch(updatedProjects, filesToUpload);
             const refreshed = await fetchProjects();
             setProjects(refreshed.content);
-            setSha(refreshed.sha);
 
             setShowProjectForm(false);
             setEditingProjectId(null);
