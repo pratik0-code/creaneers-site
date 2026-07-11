@@ -9,6 +9,20 @@ const BRANCH = 'main'; // default branch
 
 let octokit: Octokit | null = null;
 
+const syncLocalDev = async (type: "projects" | "blogs" | "articles", data: unknown[]) => {
+    try {
+        if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+            await fetch('/api/local-sync', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type, data })
+            });
+        }
+    } catch (e) {
+        console.error("Local sync error:", e);
+    }
+};
+
 export const initGitHub = (token: string) => {
     octokit = new Octokit({ auth: token });
 };
@@ -123,6 +137,8 @@ export const saveProjectBatch = async (projects: object[], files: FileToUpload[]
             ref: `heads/${BRANCH}`,
             sha: newCommitData.sha,
         });
+
+        await syncLocalDev("projects", projects);
 
     } catch (error) {
         console.error("Error batch updating project:", error);
@@ -259,9 +275,135 @@ export const saveBlogBatch = async (blogs: object[], files: FileToUpload[]) => {
             sha: newCommitData.sha,
         });
 
+        await syncLocalDev("blogs", blogs);
+
     } catch (error) {
         console.error("Error batch updating blogs:", error);
         throw new Error("Failed to save blog data to GitHub.");
+    }
+};
+
+
+
+// ─── Article CMS ─────────────────────────────────────────────────────────────
+
+/** Fetch current articles.json from GitHub. */
+export const fetchArticles = async () => {
+    if (!octokit) throw new Error("GitHub not initialized");
+    try {
+        const { data } = await octokit.repos.getContent({
+            owner: REPO_OWNER,
+            repo: REPO_NAME,
+            path: 'src/lib/articles.json',
+            ref: BRANCH,
+        });
+
+        if ('content' in data && data.content) {
+            const decoded = atob(data.content);
+            return {
+                content: JSON.parse(decoded),
+                sha: data.sha,
+            };
+        }
+        return { content: [], sha: undefined };
+    } catch (error: unknown) {
+        if (
+            error instanceof Error &&
+            'status' in (error as { status?: number }) &&
+            (error as { status?: number }).status === 404
+        ) {
+            return { content: [], sha: undefined };
+        }
+        console.error("Error fetching articles:", error);
+        throw new Error("Could not fetch articles. Are you sure your token is correct?");
+    }
+};
+
+/** Batch save articles.json + optional PDF into a single commit */
+export const saveArticleBatch = async (articles: object[], files: FileToUpload[]) => {
+    if (!octokit) throw new Error("GitHub not initialized");
+
+    try {
+        // 1. Latest commit SHA
+        const { data: refData } = await octokit.git.getRef({
+            owner: REPO_OWNER,
+            repo: REPO_NAME,
+            ref: `heads/${BRANCH}`,
+        });
+        const latestCommitSha = refData.object.sha;
+
+        // 2. Base tree SHA
+        const { data: commitData } = await octokit.git.getCommit({
+            owner: REPO_OWNER,
+            repo: REPO_NAME,
+            commit_sha: latestCommitSha,
+        });
+        const baseTreeSha = commitData.tree.sha;
+
+        // 3. Create blobs
+        const treeItems: TreeItem[] = [];
+
+        for (const file of files) {
+            const content = file.base64.includes(',') ? file.base64.split(',')[1] : file.base64;
+            const { data: blobData } = await octokit.git.createBlob({
+                owner: REPO_OWNER,
+                repo: REPO_NAME,
+                content,
+                encoding: "base64",
+            });
+            treeItems.push({
+                path: file.path,
+                mode: "100644",
+                type: "blob",
+                sha: blobData.sha,
+            });
+        }
+
+        // articles.json blob
+        const jsonContent = JSON.stringify(articles, null, 4);
+        const { data: jsonBlobData } = await octokit.git.createBlob({
+            owner: REPO_OWNER,
+            repo: REPO_NAME,
+            content: jsonContent,
+            encoding: "utf-8",
+        });
+        treeItems.push({
+            path: 'src/lib/articles.json',
+            mode: "100644",
+            type: "blob",
+            sha: jsonBlobData.sha,
+        });
+
+        // 4. Create tree
+        const { data: newTreeData } = await octokit.git.createTree({
+            owner: REPO_OWNER,
+            repo: REPO_NAME,
+            base_tree: baseTreeSha,
+            tree: treeItems,
+        });
+
+        // 5. Create commit
+        const { data: newCommitData } = await octokit.git.createCommit({
+            owner: REPO_OWNER,
+            repo: REPO_NAME,
+            message: "Update article data via Admin Panel",
+            tree: newTreeData.sha,
+            parents: [latestCommitSha],
+        });
+
+        // 6. Update ref
+        await octokit.git.updateRef({
+            owner: REPO_OWNER,
+            repo: REPO_NAME,
+            ref: `heads/${BRANCH}`,
+            sha: newCommitData.sha,
+        });
+
+        await syncLocalDev("articles", articles);
+
+    } catch (error) {
+        console.error("Error batch updating articles:", error);
+        throw new Error("Failed to save article data to GitHub.");
     }
 };
 

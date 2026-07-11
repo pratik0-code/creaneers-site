@@ -1,5 +1,6 @@
 import storiesData from './data.json';
 import blogsData from './blogs.json';
+import articlesData from './articles.json';
 
 export interface Story {
     id: string;
@@ -25,5 +26,15 @@ export interface BlogPost {
     tags?: string[];
 }
 
+export interface Article {
+    id: string;
+    title: string;
+    excerpt: string;
+    pdfUrl: string;
+    author: string;
+    date: string;
+}
+
 export const STORIES: Story[] = storiesData as Story[];
 export const BLOGS: BlogPost[] = blogsData as BlogPost[];
+export const ARTICLES: Article[] = articlesData as Article[];

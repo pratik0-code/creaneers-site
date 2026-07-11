@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { initGitHub, fetchProjects, saveProjectBatch, fetchBlogs, saveBlogBatch } from "@/lib/github-cms";
-import { Story, BlogPost } from "@/lib/data";
+import { initGitHub, fetchProjects, saveProjectBatch, fetchBlogs, saveBlogBatch, fetchArticles, saveArticleBatch } from "@/lib/github-cms";
+import { Story, BlogPost, Article } from "@/lib/data";
 
-type AdminTab = "projects" | "blogs";
+type AdminTab = "projects" | "blogs" | "articles";
 
 export default function AdminPage() {
     const [token, setToken] = useState("");
@@ -40,15 +40,26 @@ export default function AdminPage() {
     const [editingBlogId, setEditingBlogId] = useState<string | null>(null);
     const [tagInput, setTagInput] = useState("");
 
+    // ── Article state ────────────────────────────────────────────────────────
+    const [articles, setArticles] = useState<Article[]>([]);
+    const [showArticleForm, setShowArticleForm] = useState(false);
+    const [newArticle, setNewArticle] = useState<Partial<Article>>({
+        id: "", title: "", author: "CREANEERS Studio", date: new Date().toISOString().split("T")[0],
+        excerpt: "", pdfUrl: "",
+    });
+    const [articlePdfFile, setArticlePdfFile] = useState<File | null>(null);
+    const [editingArticleId, setEditingArticleId] = useState<string | null>(null);
+
     // ── Auth ─────────────────────────────────────────────────────────────────
     const handleLogin = useCallback(async (authToken: string) => {
         setLoading(true);
         setMessage("");
         try {
             initGitHub(authToken);
-            const [projectRes, blogRes] = await Promise.all([fetchProjects(), fetchBlogs()]);
+            const [projectRes, blogRes, articleRes] = await Promise.all([fetchProjects(), fetchBlogs(), fetchArticles()]);
             setProjects(projectRes.content);
             setBlogs(blogRes.content);
+            setArticles(articleRes.content);
             setIsLoggedIn(true);
             localStorage.setItem("github_cms_token", authToken);
         } catch (error: unknown) {
@@ -73,6 +84,7 @@ export default function AdminPage() {
         setToken("");
         setProjects([]);
         setBlogs([]);
+        setArticles([]);
     };
 
     // ── Helpers ───────────────────────────────────────────────────────────────
@@ -108,8 +120,7 @@ export default function AdminPage() {
         try {
             const updated = projects.filter((p) => p.id !== id);
             await saveProjectBatch(updated, []);
-            const refreshed = await fetchProjects();
-            setProjects(refreshed.content);
+            setProjects(updated);
             showMsg("Project deleted successfully!");
         } catch (error: unknown) {
             showMsg("Failed to delete project: " + (error instanceof Error ? error.message : "Unknown error"), "error");
@@ -163,8 +174,7 @@ export default function AdminPage() {
                 : [projectToSave, ...projects];
 
             await saveProjectBatch(updatedProjects, filesToUpload);
-            const refreshed = await fetchProjects();
-            setProjects(refreshed.content);
+            setProjects(updatedProjects);
 
             setShowProjectForm(false);
             setEditingProjectId(null);
@@ -195,8 +205,7 @@ export default function AdminPage() {
         try {
             const updated = blogs.filter((b) => b.id !== id);
             await saveBlogBatch(updated, []);
-            const refreshed = await fetchBlogs();
-            setBlogs(refreshed.content);
+            setBlogs(updated);
             showMsg("Blog post deleted successfully!");
         } catch (error: unknown) {
             showMsg("Failed to delete blog: " + (error instanceof Error ? error.message : "Unknown error"), "error");
@@ -238,8 +247,7 @@ export default function AdminPage() {
                 : [postToSave, ...blogs];
 
             await saveBlogBatch(updatedBlogs, filesToUpload);
-            const refreshed = await fetchBlogs();
-            setBlogs(refreshed.content);
+            setBlogs(updatedBlogs);
 
             setShowBlogForm(false);
             setEditingBlogId(null);
@@ -249,6 +257,74 @@ export default function AdminPage() {
             showMsg("Blog post saved! The site will rebuild and deploy shortly.");
         } catch (error: unknown) {
             showMsg("Failed to save blog post: " + (error instanceof Error ? error.message : "Unknown error"), "error");
+        }
+        setLoading(false);
+    };
+
+    // ── Article CRUD ──────────────────────────────────────────────────────────
+    const handleEditArticle = (article: Article) => {
+        setEditingArticleId(article.id);
+        setNewArticle(article);
+        setArticlePdfFile(null);
+        setShowArticleForm(true);
+        setMessage("");
+    };
+
+    const handleDeleteArticle = async (id: string) => {
+        if (!confirm("Are you sure you want to delete this article?")) return;
+        setLoading(true);
+        setMessage("");
+        try {
+            const updated = articles.filter((a) => a.id !== id);
+            await saveArticleBatch(updated, []);
+            setArticles(updated);
+            showMsg("Article deleted successfully!");
+        } catch (error: unknown) {
+            showMsg("Failed to delete article: " + (error instanceof Error ? error.message : "Unknown error"), "error");
+        }
+        setLoading(false);
+    };
+
+    const handleSaveArticle = async () => {
+        setLoading(true);
+        setMessage("");
+        try {
+            const articleId = newArticle.title?.toLowerCase().replace(/[^a-z0-9]+/g, "-") || `article-${Date.now()}`;
+            
+            let uploadedPdf = editingArticleId ? (articles.find((a) => a.id === editingArticleId)?.pdfUrl || "") : "";
+            const filesToUpload: { path: string; base64: string }[] = [];
+
+            if (articlePdfFile) {
+                const base64 = await fileToBase64(articlePdfFile);
+                const ext = articlePdfFile.name.split(".").pop();
+                const path = `public/articles/${articleId}/document.${ext}`;
+                filesToUpload.push({ path, base64 });
+                uploadedPdf = `/${path.replace("public/", "")}`;
+            }
+
+            const articleToSave: Article = {
+                id: editingArticleId || articleId,
+                title: newArticle.title || "Untitled",
+                author: newArticle.author || "CREANEERS Studio",
+                date: newArticle.date || new Date().toISOString().split("T")[0],
+                excerpt: newArticle.excerpt || "",
+                pdfUrl: uploadedPdf,
+            };
+
+            const updatedArticles = editingArticleId
+                ? articles.map((a) => (a.id === editingArticleId ? articleToSave : a))
+                : [articleToSave, ...articles];
+
+            await saveArticleBatch(updatedArticles, filesToUpload);
+            setArticles(updatedArticles);
+
+            setShowArticleForm(false);
+            setEditingArticleId(null);
+            setArticlePdfFile(null);
+            setNewArticle({ id: "", title: "", author: "CREANEERS Studio", date: new Date().toISOString().split("T")[0], excerpt: "", pdfUrl: "" });
+            showMsg("Article saved! The site will rebuild and deploy shortly.");
+        } catch (error: unknown) {
+            showMsg("Failed to save article: " + (error instanceof Error ? error.message : "Unknown error"), "error");
         }
         setLoading(false);
     };
@@ -297,7 +373,7 @@ export default function AdminPage() {
 
                 {/* Tab switcher */}
                 <div className="flex gap-1 mb-10 bg-neutral-900 border border-neutral-800 rounded-lg p-1 w-fit">
-                    {(["projects", "blogs"] as AdminTab[]).map((tab) => (
+                    {(["projects", "blogs", "articles"] as AdminTab[]).map((tab) => (
                         <button
                             key={tab}
                             onClick={() => { setActiveTab(tab); setMessage(""); }}
@@ -580,6 +656,105 @@ export default function AdminPage() {
                                         {loading ? "Saving..." : "Publish Post"}
                                     </button>
                                     <button onClick={() => { setShowBlogForm(false); setEditingBlogId(null); setTagInput(""); }} disabled={loading}
+                                        className="bg-neutral-900 border border-neutral-700 text-white px-8 py-3 rounded shadow-sm hover:bg-neutral-800 transition">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* ══ ARTICLES TAB ═════════════════════════════════════════════════ */}
+                {activeTab === "articles" && (
+                    <div>
+                        {!showArticleForm ? (
+                            <div>
+                                <button
+                                    onClick={() => {
+                                        setEditingArticleId(null);
+                                        setNewArticle({ id: "", title: "", author: "CREANEERS Studio", date: new Date().toISOString().split("T")[0], excerpt: "", pdfUrl: "" });
+                                        setShowArticleForm(true);
+                                    }}
+                                    className="bg-white text-black px-6 py-3 rounded-lg shadow-md hover:bg-neutral-200 transition mb-10 inline-block font-medium"
+                                >
+                                    + Add New Article
+                                </button>
+
+                                <div className="bg-neutral-900 rounded-xl border border-neutral-800 p-6">
+                                    <h2 className="text-xl font-medium mb-6 text-white">Articles ({articles.length})</h2>
+                                    {articles.length === 0 ? (
+                                        <div className="text-center py-12">
+                                            <p className="text-neutral-400 mb-2">No articles yet.</p>
+                                        </div>
+                                    ) : (
+                                        <ul className="divide-y divide-neutral-800">
+                                            {articles.map((a) => (
+                                                <li key={a.id} className="py-4 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                                                    <div>
+                                                        <p className="font-medium text-white">{a.title}</p>
+                                                        <p className="text-sm text-neutral-400">
+                                                            {a.author} · {new Date(a.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex gap-3">
+                                                        <button onClick={() => handleEditArticle(a)} className="text-sm px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded transition">Edit</button>
+                                                        <button onClick={() => handleDeleteArticle(a.id)} className="text-sm px-4 py-2 bg-red-900/50 hover:bg-red-900/80 text-red-200 rounded transition">Delete</button>
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="bg-neutral-900 rounded-xl border border-neutral-800 p-6 md:p-10">
+                                <h2 className="text-2xl font-serif mb-8 border-b border-neutral-800 pb-4 text-white">
+                                    {editingArticleId ? "Edit Article" : "Add New Article"}
+                                </h2>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                    <div className="md:col-span-2">
+                                        <label className="block text-sm font-medium text-neutral-300 mb-2">Title</label>
+                                        <input type="text" className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none"
+                                            value={newArticle.title} onChange={(e) => setNewArticle({ ...newArticle, title: e.target.value })}
+                                            placeholder="Your article title..." />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-neutral-300 mb-2">Author</label>
+                                        <input type="text" className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none"
+                                            value={newArticle.author} onChange={(e) => setNewArticle({ ...newArticle, author: e.target.value })} />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-neutral-300 mb-2">Date</label>
+                                        <input type="date" className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none"
+                                            value={newArticle.date} onChange={(e) => setNewArticle({ ...newArticle, date: e.target.value })} />
+                                    </div>
+                                </div>
+
+                                <div className="mb-6">
+                                    <label className="block text-sm font-medium text-neutral-300 mb-2">Excerpt</label>
+                                    <textarea className="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded focus:ring-2 focus:ring-white outline-none h-24"
+                                        value={newArticle.excerpt} onChange={(e) => setNewArticle({ ...newArticle, excerpt: e.target.value })}
+                                        placeholder="A short teaser for your article..." />
+                                </div>
+
+                                <div className="mb-8 bg-neutral-950 p-6 rounded-lg border border-neutral-800">
+                                    <h3 className="font-medium text-white mb-4">PDF Document</h3>
+                                    <label className="block text-sm text-neutral-400 mb-2">{editingArticleId ? "Leave blank to keep existing PDF" : "Upload a PDF file"}</label>
+                                    <input type="file" accept="application/pdf" className="w-full text-sm text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-neutral-800 file:text-white hover:file:bg-neutral-700"
+                                        onChange={(e) => setArticlePdfFile(e.target.files?.[0] || null)} />
+                                    {editingArticleId && articles.find(a => a.id === editingArticleId)?.pdfUrl && (
+                                        <p className="text-xs text-neutral-500 mt-2">Current: {articles.find(a => a.id === editingArticleId)?.pdfUrl}</p>
+                                    )}
+                                </div>
+
+                                <div className="flex gap-4">
+                                    <button onClick={handleSaveArticle} disabled={loading || !newArticle.title || !newArticle.excerpt || (!editingArticleId && !articlePdfFile)}
+                                        className="bg-white text-black px-8 py-3 rounded shadow hover:bg-neutral-200 transition disabled:opacity-50 font-medium">
+                                        {loading ? "Saving..." : "Publish Article"}
+                                    </button>
+                                    <button onClick={() => { setShowArticleForm(false); setEditingArticleId(null); setArticlePdfFile(null); }} disabled={loading}
                                         className="bg-neutral-900 border border-neutral-700 text-white px-8 py-3 rounded shadow-sm hover:bg-neutral-800 transition">
                                         Cancel
                                     </button>
