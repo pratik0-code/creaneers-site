@@ -8,7 +8,8 @@ interface Props {
     params: Promise<{ id: string }>;
 }
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
+    if (BLOGS.length === 0) return [{ id: 'dummy-post' }];
     return BLOGS.map((post) => ({ id: post.id }));
 }
 
